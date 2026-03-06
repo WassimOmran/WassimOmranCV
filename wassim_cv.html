@@ -378,6 +378,10 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 #sndBtn{position:fixed;bottom:24px;left:24px;z-index:9000;width:42px;height:42px;border-radius:50%;background:rgba(0,8,18,.85);border:1px solid rgba(0,245,255,.25);color:rgba(0,245,255,.8);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);transition:border-color .25s,box-shadow .25s,transform .2s;box-shadow:0 0 12px rgba(0,245,255,.08);}
 #sndBtn:hover{border-color:rgba(0,245,255,.6);box-shadow:0 0 22px rgba(0,245,255,.22);transform:scale(1.1);}
 #sndBtn.muted{border-color:rgba(255,80,80,.3);color:rgba(255,80,80,.6);box-shadow:0 0 12px rgba(255,80,80,.08);}
+@media(max-width:900px){
+  #sndBtn{width:48px;height:48px;font-size:20px;bottom:20px;left:16px;animation:sndPulse 2.5s ease-in-out 3;}
+}
+@keyframes sndPulse{0%,100%{box-shadow:0 0 12px rgba(0,245,255,.08);}50%{box-shadow:0 0 22px rgba(0,245,255,.45);border-color:rgba(0,245,255,.6);}}
 
 /* ── FOOTER ── */
 .footer{padding:60px 0 40px;position:relative;}
@@ -1076,7 +1080,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 // ═══════════════════════════════════════════════════
 // AUDIO ENGINE
 // ═══════════════════════════════════════════════════
-let audioCtx=null,soundOn=true;
+let audioCtx=null,soundOn=true,audioReady=false;
 function toggleSound(){
   soundOn=!soundOn;
   const btn=document.getElementById('sndBtn');
@@ -1089,28 +1093,44 @@ function toggleSound(){
   }
 }
 function initAudio(){
-  if(audioCtx){
-    // iOS: always try to resume if suspended
-    if(audioCtx.state==='suspended')audioCtx.resume().then(()=>{if(!humNode){humNode=ambientHum();playBoot();}});
-    return;
+  // Create context if not yet created
+  if(!audioCtx){
+    try{
+      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    }catch(e){audioCtx=null;return;}
   }
-  try{
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    // iOS Safari creates context suspended — must resume synchronously inside gesture
-    audioCtx.resume().then(()=>{humNode=ambientHum();playBoot();});
-  }catch(e){audioCtx=null;}
+  // iOS/Android: call resume() SYNCHRONOUSLY inside the gesture handler
+  // Do NOT rely on .then() — the gesture context is lost by then on iOS
+  if(audioCtx.state==='suspended'){
+    audioCtx.resume();
+  }
+  // Schedule sound start with short delay to allow context to reach 'running'
+  if(!audioReady){
+    audioReady=true;
+    setTimeout(()=>{
+      if(soundOn&&audioCtx&&audioCtx.state==='running'){
+        if(!humNode)humNode=ambientHum();
+        playBoot();
+      } else {
+        // Fallback: try once more after another 200ms
+        setTimeout(()=>{
+          if(soundOn&&audioCtx){
+            if(audioCtx.state==='suspended')audioCtx.resume();
+            if(!humNode)humNode=ambientHum();
+            playBoot();
+          }
+        },200);
+      }
+    },80);
+  }
 }
-// Auto-start audio on first DIRECT user gesture only (scroll doesn't count on iOS)
-['click','touchend'].forEach(ev=>
-  window.addEventListener(ev,()=>initAudio(),{once:true,passive:true})
-);
 // Resume AudioContext when returning from PDF/external page on mobile
 document.addEventListener('visibilitychange',()=>{
   if(!document.hidden&&audioCtx&&audioCtx.state==='suspended'){
     audioCtx.resume();
   }
 });
-// Also resume on any touch if somehow still suspended
+// Keep context alive on any touch
 window.addEventListener('touchstart',()=>{
   if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
 },{passive:true});
