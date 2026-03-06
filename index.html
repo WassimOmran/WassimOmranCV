@@ -940,12 +940,19 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 // ═══════════════════════════════════════════════════
 let audioCtx=null,soundOn=true;
 function initAudio(){
-  if(audioCtx)return;
-  audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  humNode=ambientHum();playBoot();
+  if(audioCtx){
+    // iOS: always try to resume if suspended
+    if(audioCtx.state==='suspended')audioCtx.resume().then(()=>{if(!humNode){humNode=ambientHum();playBoot();}});
+    return;
+  }
+  try{
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    // iOS Safari creates context suspended — must resume synchronously inside gesture
+    audioCtx.resume().then(()=>{humNode=ambientHum();playBoot();});
+  }catch(e){audioCtx=null;}
 }
-// Auto-start audio on first interaction
-['click','touchstart','keydown','scroll'].forEach(ev=>
+// Auto-start audio on first DIRECT user gesture only (scroll doesn't count on iOS)
+['click','touchend'].forEach(ev=>
   window.addEventListener(ev,()=>initAudio(),{once:true,passive:true})
 );
 // Resume AudioContext when returning from PDF/external page on mobile
@@ -954,6 +961,10 @@ document.addEventListener('visibilitychange',()=>{
     audioCtx.resume();
   }
 });
+// Also resume on any touch if somehow still suspended
+window.addEventListener('touchstart',()=>{
+  if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
+},{passive:true});
 function playBeep(freq=440,dur=0.08,vol=0.04,type='sine'){
   if(!soundOn||!audioCtx)return;
   const o=audioCtx.createOscillator(),g=audioCtx.createGain();
@@ -1358,8 +1369,7 @@ function observeAll(){
       });
     }
     window.addEventListener('scroll',checkAchInView,{passive:true});
-    // Also check immediately in case elements are already visible
-    setTimeout(checkAchInView,400);
+    // Don't check immediately — only fire when user actually scrolls to element
   } else {
     // Desktop: IntersectionObserver
     const achObs=new IntersectionObserver(entries=>{
@@ -1449,19 +1459,33 @@ const ACHS={
   'konami':{icon:'🕹️',title:'CHEAT CODE',desc:'Konami code master'},
   'night_owl':{icon:'🌙',title:'2 AM GENIUS',desc:'Caught at the origin hour'},
 };
+// Achievement queue — stagger toasts so they don't stack instantly
+let achQueue=[],achQueueRunning=false;
+function flushAchQueue(){
+  if(!achQueue.length){achQueueRunning=false;return;}
+  achQueueRunning=true;
+  const id=achQueue.shift();
+  _showAch(id);
+  setTimeout(flushAchQueue,1400);
+}
+function _showAch(id){
+  const a=ACHS[id];if(!a)return;
+  const t=document.createElement('div');
+  t.className='ach-toast';
+  t.innerHTML=`<div class="ach-icon">${a.icon}</div><div class="ach-text"><b>\ud83c\udfc6 ${a.title}</b>${a.desc}</div>`;
+  document.getElementById('achWrap').appendChild(t);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));
+  playAch();
+  setTimeout(()=>{t.style.transition='opacity .5s';t.style.opacity='0';setTimeout(()=>t.remove(),600);},3500);
+}
 let unlockedAchs=new Set(),achCount=0;
 function unlock(id){
   if(unlockedAchs.has(id))return;
   unlockedAchs.add(id);achCount++;
   document.getElementById('hudAch').textContent=achCount;
   const a=ACHS[id];if(!a)return;
-  const t=document.createElement('div');
-  t.className='ach-toast';
-  t.innerHTML=`<div class="ach-icon">${a.icon}</div><div class="ach-text"><b>🏆 ${a.title}</b>${a.desc}</div>`;
-  document.getElementById('achWrap').appendChild(t);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));
-  playAch();
-  setTimeout(()=>{t.style.transition='opacity .5s';t.style.opacity='0';setTimeout(()=>t.remove(),600);},4000);
+  achQueue.push(id);
+  if(!achQueueRunning)flushAchQueue();
 }
 
 // Footer quote typewriter + 2AM easter egg
