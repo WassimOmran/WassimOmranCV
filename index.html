@@ -1080,7 +1080,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 // ═══════════════════════════════════════════════════
 // AUDIO ENGINE
 // ═══════════════════════════════════════════════════
-let audioCtx=null,soundOn=true,audioReady=false;
+let audioCtx=null,soundOn=true;
 function toggleSound(){
   soundOn=!soundOn;
   const btn=document.getElementById('sndBtn');
@@ -1093,44 +1093,23 @@ function toggleSound(){
   }
 }
 function initAudio(){
-  // Create context if not yet created
-  if(!audioCtx){
-    try{
-      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    }catch(e){audioCtx=null;return;}
-  }
-  // iOS/Android: call resume() SYNCHRONOUSLY inside the gesture handler
-  // Do NOT rely on .then() — the gesture context is lost by then on iOS
-  if(audioCtx.state==='suspended'){
-    audioCtx.resume();
-  }
-  // Schedule sound start with short delay to allow context to reach 'running'
-  if(!audioReady){
-    audioReady=true;
-    setTimeout(()=>{
-      if(soundOn&&audioCtx&&audioCtx.state==='running'){
-        if(!humNode)humNode=ambientHum();
-        playBoot();
-      } else {
-        // Fallback: try once more after another 200ms
-        setTimeout(()=>{
-          if(soundOn&&audioCtx){
-            if(audioCtx.state==='suspended')audioCtx.resume();
-            if(!humNode)humNode=ambientHum();
-            playBoot();
-          }
-        },200);
-      }
-    },80);
-  }
+  if(audioCtx)return;
+  try{
+    // Creating AudioContext INSIDE a gesture handler (click/touchstart) makes it
+    // start in 'running' state on iOS Safari and Android Chrome — no resume() needed
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    humNode=ambientHum();
+    playBoot();
+  }catch(e){audioCtx=null;}
 }
-// Resume AudioContext when returning from PDF/external page on mobile
+// Trigger on touchstart (not touchend) — keeps iOS gesture context intact
+['click','touchstart','keydown'].forEach(ev=>
+  window.addEventListener(ev,()=>initAudio(),{once:true,passive:true})
+);
+// Resume if context suspended (e.g. returning from another tab/PDF)
 document.addEventListener('visibilitychange',()=>{
-  if(!document.hidden&&audioCtx&&audioCtx.state==='suspended'){
-    audioCtx.resume();
-  }
+  if(!document.hidden&&audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
 });
-// Keep context alive on any touch
 window.addEventListener('touchstart',()=>{
   if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
 },{passive:true});
