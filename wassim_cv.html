@@ -4,6 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WASSIM OMRAN — Engineering Blueprint</title>
+
+<!-- SEO -->
+<meta name="description" content="Wassim Omran — Electrical Engineer, AI Specialist & Patent Holder. Inventor of The Infinity Glove. Process & Line Senior Coordinator at NAPCO Consumer, Saudi Arabia.">
+<meta name="author" content="Wassim Omran">
+<meta name="keywords" content="Wassim Omran, Electrical Engineer, AI Specialist, Infinity Glove, Machine Vision, PLC, NAPCO, Lebanon, Saudi Arabia, GITEX">
+<link rel="canonical" href="https://wassimomran.github.io/WassimOmranCV/">
+
+<!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://wassimomran.github.io/WassimOmranCV/">
+<meta property="og:title" content="WASSIM OMRAN — Electrical Engineer & AI Specialist">
+<meta property="og:description" content="Inventor of The Infinity Glove · Patent Holder · GITEX Showcase · Machine Vision Expert · AI Agent Developer. Interactive Blueprint CV.">
+<meta property="og:image" content="https://wassimomran.github.io/WassimOmranCV/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Wassim Omran CV">
+<meta property="og:locale" content="en_US">
+<meta property="profile:first_name" content="Wassim">
+<meta property="profile:last_name" content="Omran">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://wassimomran.github.io/WassimOmranCV/">
+<meta name="twitter:title" content="WASSIM OMRAN — Electrical Engineer & AI Specialist">
+<meta name="twitter:description" content="Inventor of The Infinity Glove · Patent Holder · GITEX Showcase · Machine Vision Expert · AI Agent Developer.">
+<meta name="twitter:image" content="https://wassimomran.github.io/WassimOmranCV/preview.png">
+
+<!-- iMessage / iOS link preview -->
+<meta name="apple-mobile-web-app-title" content="Wassim Omran CV">
+<link rel="apple-touch-icon" href="https://wassimomran.github.io/WassimOmranCV/preview.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@200;400;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -328,7 +359,7 @@ body.blueprint #bpModeLabel{display:block;}
 @keyframes tlPing{0%{transform:scale(1);opacity:.6;}100%{transform:scale(2.2);opacity:0;}}
 .tl-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;background:rgba(0,245,255,.2);border:1px solid rgba(0,245,255,.3);border-radius:50%;cursor:pointer;transition:all .2s;z-index:5;}
 .tl-marker:hover,.tl-marker.active{background:var(--cyan);box-shadow:0 0 10px var(--cyan);}
-.tl-marker-label{position:absolute;top:18px;left:50%;transform:translateX(-50%);font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.5);white-space:nowrap;letter-spacing:1px;transition:color .2s;}
+.tl-marker-label{position:absolute;top:28px;left:50%;transform:translateX(-50%);font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.5);white-space:nowrap;letter-spacing:1px;transition:color .2s;}
 .tl-marker.active .tl-marker-label{color:var(--cyan);}
 #tlCard{
   margin:30px 40px 0;
@@ -420,6 +451,78 @@ body.blueprint #bpModeLabel{display:block;}
   text-decoration:none;letter-spacing:3px;transition:box-shadow .3s,background .2s;
 }
 .gm-watch-btn:hover{box-shadow:0 0 24px rgba(0,245,255,.3);background:rgba(0,245,255,.06);}
+
+/* ── HERO FLEX ── */
+.hero-flex{display:flex;align-items:center;gap:44px;}
+.hero-text{flex:1;min-width:0;}
+.hero-avatar-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px;}
+
+/* ── HOLOGRAPHIC AVATAR ── */
+.hex-avatar{width:160px;height:160px;position:relative;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);overflow:hidden;}
+.hex-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.hex-avatar-wrap{position:relative;width:160px;height:160px;filter:drop-shadow(0 0 18px rgba(0,245,255,.55)) drop-shadow(0 0 40px rgba(0,100,200,.3));animation:hexFlicker 5s ease-in-out infinite;}
+@keyframes hexFlicker{0%,90%,100%{filter:drop-shadow(0 0 18px rgba(0,245,255,.55)) drop-shadow(0 0 40px rgba(0,100,200,.3));}92%{filter:drop-shadow(0 0 4px rgba(0,245,255,.2)) brightness(.6);}94%{filter:drop-shadow(0 0 18px rgba(0,245,255,.55)) brightness(1.1);}96%{filter:drop-shadow(0 0 4px rgba(0,245,255,.15)) brightness(.7);}98%{filter:drop-shadow(0 0 22px rgba(0,245,255,.7)) brightness(1.15);}}
+.hex-ring{position:absolute;inset:-8px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:linear-gradient(135deg,rgba(0,245,255,.6),rgba(0,136,255,.4),rgba(0,245,255,.6));z-index:-1;animation:hexRingSpin 6s linear infinite;}
+@keyframes hexRingSpin{to{filter:hue-rotate(360deg);}}
+.hex-ring2{position:absolute;inset:-14px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:rgba(0,245,255,.08);z-index:-2;animation:hexPulse2 2.2s ease-in-out infinite;}
+@keyframes hexPulse2{0%,100%{opacity:.4;transform:scale(1);}50%{opacity:.9;transform:scale(1.04);}}
+.hex-scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(0,245,255,.7),transparent);box-shadow:0 0 10px var(--cyan);animation:hexScanLine 2.5s linear infinite;pointer-events:none;}
+@keyframes hexScanLine{0%{top:0%;opacity:0;}5%{opacity:1;}95%{opacity:1;}100%{top:100%;opacity:0;}}
+.avatar-id{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.45);letter-spacing:2px;text-align:center;}
+@media(max-width:700px){.hero-flex{flex-direction:column-reverse;gap:20px;}.hex-avatar-wrap,.hex-avatar{width:110px;height:110px;}.hex-ring{inset:-5px;}.hex-ring2{inset:-9px;}}
+
+/* ── PATENT BADGE ── */
+.patent-card{background:rgba(0,10,22,.95);border:1px solid rgba(0,245,255,.15);border-radius:6px;padding:28px 32px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(0,245,255,.06);}
+.patent-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,245,255,.03),transparent 60%);pointer-events:none;}
+.patent-left{flex:1;min-width:200px;}
+.patent-num{font-family:'Orbitron',monospace;font-size:11px;color:rgba(0,245,255,.45);letter-spacing:4px;margin-bottom:8px;}
+.patent-title{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(0,245,255,.3);margin-bottom:6px;}
+.patent-holder{font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(0,245,255,.6);letter-spacing:2px;margin-bottom:12px;}
+.patent-desc{font-size:13px;color:rgba(165,212,255,.65);line-height:1.7;}
+.patent-stamp-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.patent-stamp{width:100px;height:100px;border-radius:50%;border:3px solid var(--green);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;box-shadow:0 0 20px rgba(0,255,136,.25),inset 0 0 20px rgba(0,255,136,.05);position:relative;transform:scale(0) rotate(-30deg);opacity:0;transition:transform .7s cubic-bezier(.175,.885,.32,1.275),opacity .4s;}
+.patent-stamp.stamped{transform:scale(1) rotate(0deg);opacity:1;}
+.patent-stamp::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px dashed rgba(0,255,136,.35);animation:stampSpin 12s linear infinite;}
+@keyframes stampSpin{to{transform:rotate(360deg);}}
+.stamp-check{font-size:28px;line-height:1;}
+.stamp-text{font-family:'Orbitron',monospace;font-size:8px;font-weight:900;color:var(--green);letter-spacing:2px;text-align:center;}
+.patent-chip{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dark);background:var(--green);padding:3px 10px;border-radius:2px;box-shadow:0 0 10px rgba(0,255,136,.4);letter-spacing:2px;}
+
+/* ── CONFERENCES MODAL ── */
+#confModal{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;}
+#confModalBg{position:absolute;inset:0;background:rgba(0,2,8,.92);backdrop-filter:blur(6px);cursor:pointer;}
+#confModalBox{position:relative;z-index:1;background:linear-gradient(135deg,rgba(0,18,38,.99),rgba(0,6,18,.99));border:1px solid var(--cyan);border-radius:8px;width:min(480px,92vw);overflow:hidden;box-shadow:0 0 60px rgba(0,245,255,.2);animation:modalIn .35s cubic-bezier(.175,.885,.32,1.275) forwards;}
+.conf-head{padding:16px 20px;border-bottom:1px solid rgba(0,245,255,.15);background:rgba(0,245,255,.04);position:relative;}
+.conf-head-title{font-family:'Orbitron',monospace;font-size:13px;color:var(--cyan);letter-spacing:3px;font-weight:700;}
+.conf-head-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.45);letter-spacing:2px;margin-top:4px;}
+#confModalClose{position:absolute;top:14px;right:16px;color:rgba(0,245,255,.5);cursor:pointer;font-size:22px;line-height:1;transition:color .2s;}
+#confModalClose:hover{color:var(--cyan);}
+.conf-list{padding:16px 20px 20px;display:flex;flex-direction:column;gap:10px;}
+.conf-item{background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.1);border-left:3px solid var(--cyan);border-radius:3px;padding:14px 18px;display:flex;align-items:center;gap:16px;transition:background .2s;}
+.conf-item:hover{background:rgba(0,245,255,.08);}
+.conf-icon{font-size:26px;flex-shrink:0;}
+.conf-info{flex:1;}
+.conf-name{font-family:'Orbitron',monospace;font-size:12px;color:#fff;font-weight:700;margin-bottom:3px;}
+.conf-detail{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.55);letter-spacing:1px;}
+.conf-badge{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dark);background:var(--cyan);padding:2px 8px;border-radius:2px;flex-shrink:0;}
+
+/* ── MEDIA MENTIONS ── */
+.media-marquee-outer{overflow:hidden;position:relative;padding:10px 0;}
+.media-marquee-outer::before,.media-marquee-outer::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.media-marquee-outer::before{left:0;background:linear-gradient(90deg,var(--dark),transparent);}
+.media-marquee-outer::after{right:0;background:linear-gradient(270deg,var(--dark),transparent);}
+.media-track{display:flex;animation:marqueeScroll 20s linear infinite;width:max-content;}
+.media-track:hover{animation-play-state:paused;}
+@keyframes marqueeScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.media-logo{display:flex;align-items:center;justify-content:center;padding:16px 36px;flex-shrink:0;filter:grayscale(1) brightness(.5);transition:filter .3s,transform .3s;cursor:pointer;}
+.media-logo:hover{filter:grayscale(0) brightness(1.1);transform:scale(1.1);}
+.media-logo img{height:36px;max-width:110px;object-fit:contain;}
+.media-caption{text-align:center;margin-top:14px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.3);letter-spacing:3px;}
+
+/* ── CLICKABLE STATS ── */
+.stat.clickable{cursor:pointer;}
+.stat.clickable:hover{box-shadow:0 0 30px rgba(0,245,255,.22);border-top-color:var(--green);}
+.stat.clickable .slabel::after{content:' ▶';opacity:.5;}
 </style>
 </head>
 <body>
@@ -439,7 +542,6 @@ body.blueprint #bpModeLabel{display:block;}
 <!-- HUD -->
 <div class="hud" id="htl">UNIT :: WO-001<br>CLEARANCE :: <span style="color:var(--cyan)">ALPHA</span><br>STATUS :: <span class="hdot"></span>ONLINE</div>
 <div class="hud" id="htr"><span id="hudTime">--:--:--</span><br>SAU · DAMMAM<br>FPS :: <span id="hudFps">60</span></div>
-<div class="hud" id="hbr">SCROLL :: <span id="hudScroll">0%</span><br>ACH :: <span id="hudAch">0</span>/7</div>
 
 <!-- BOOT -->
 <div id="boot">
@@ -492,6 +594,25 @@ body.blueprint #bpModeLabel{display:block;}
   </div>
 </div>
 
+<!-- CONFERENCES MODAL -->
+<div id="confModal" style="display:none;">
+  <div id="confModalBg"></div>
+  <div id="confModalBox">
+    <div class="conf-head">
+      <div class="conf-head-title">⚡ CONFERENCES & SHOWCASES</div>
+      <div class="conf-head-sub">5 INTERNATIONAL STAGES · THE INFINITY GLOVE</div>
+      <div id="confModalClose">✕</div>
+    </div>
+    <div class="conf-list">
+      <div class="conf-item"><div class="conf-icon">🇦🇪</div><div class="conf-info"><div class="conf-name">GITEX GLOBAL</div><div class="conf-detail">Dubai, UAE · World's Largest Tech Show · 2024</div></div><div class="conf-badge">DUBAI</div></div>
+      <div class="conf-item"><div class="conf-icon">🇱🇧</div><div class="conf-info"><div class="conf-name">STEP CONFERENCE</div><div class="conf-detail">Beirut, Lebanon · MENA's Premier Tech Summit</div></div><div class="conf-badge">BEIRUT</div></div>
+      <div class="conf-item"><div class="conf-icon">🌍</div><div class="conf-info"><div class="conf-name">YOUTH X</div><div class="conf-detail">Regional Youth Innovation Forum</div></div><div class="conf-badge">REGIONAL</div></div>
+      <div class="conf-item"><div class="conf-icon">🇦🇪</div><div class="conf-info"><div class="conf-name">MBRIF</div><div class="conf-detail">Mohammed Bin Rashid Innovation Fund · Dubai</div></div><div class="conf-badge">DUBAI</div></div>
+      <div class="conf-item"><div class="conf-icon">🏆</div><div class="conf-info"><div class="conf-name">GLOBAL STUDENT ENTREPRENEUR AWARDS</div><div class="conf-detail">International Entrepreneurship Competition · Finalist</div></div><div class="conf-badge">GLOBAL</div></div>
+    </div>
+  </div>
+</div>
+
 <!-- GLOVE MODAL -->
 <div id="gloveModal" style="display:none;">
   <div id="gloveModalBg"></div>
@@ -519,22 +640,36 @@ body.blueprint #bpModeLabel{display:block;}
       <div class="hscan"></div>
       <div class="hc tl"></div><div class="hc tr"></div><div class="hc bl"></div><div class="hc br"></div>
       <div class="htag">CLASSIFIED PROFILE :: ENGINEER ID-001 :: ACCESS GRANTED</div>
-      <div class="hname-wrap" id="nameWrap">
-        <canvas id="nameCanvas"></canvas>
-        <div class="hname para-layer" data-speed="0.3" id="hnamEl">WASSIM <span class="acc">OMRAN</span></div>
-        <div class="hname-hint">✦ CLICK TO EXPLODE</div>
-      </div>
-      <div class="hdiv"></div>
-      <div class="htyped" id="typedTitle"><span class="cblink"></span></div>
-      <div class="hmeta">
-        <span>📞 +966 050 951 7855</span>
-        <span>📞 +961 70 266 236</span>
-        <a href="mailto:wassimomran62@gmail.com">✉ wassimomran62@gmail.com</a>
-        <a href="https://www.linkedin.com/in/wassimomran" target="_blank" rel="noopener">🔗 LinkedIn</a>
-        <span>📅 DOB 30/01/2001</span>
-      </div>
-      <div class="hbio para-layer" data-speed="0.15">
-        Electrical engineer passionate about leveraging technology to solve real-world challenges. Inventor of <strong style="color:var(--cyan);text-shadow:0 0 10px rgba(0,245,255,.4)">"The Infinity Glove,"</strong> a patented assistive technology transforming communication for individuals with hearing and speech impairments. AI specialist with deep expertise in prompt engineering and autonomous agent development.
+      <div class="hero-flex">
+        <div class="hero-text">
+          <div class="hname-wrap" id="nameWrap">
+            <canvas id="nameCanvas"></canvas>
+            <div class="hname para-layer" data-speed="0.3" id="hnamEl">WASSIM <span class="acc">OMRAN</span></div>
+            <div class="hname-hint">✦ CLICK TO EXPLODE</div>
+          </div>
+          <div class="hdiv"></div>
+          <div class="htyped" id="typedTitle"><span class="cblink"></span></div>
+          <div class="hmeta">
+            <span>📞 +966 050 951 7855</span>
+            <span>📞 +961 70 266 236</span>
+            <a href="mailto:wassimomran62@gmail.com">✉ wassimomran62@gmail.com</a>
+            <a href="https://www.linkedin.com/in/wassimomran" target="_blank" rel="noopener">🔗 LinkedIn</a>
+            <span>📅 DOB 30/01/2001</span>
+          </div>
+          <div class="hbio para-layer" data-speed="0.15">
+            Electrical engineer passionate about leveraging technology to solve real-world challenges. Inventor of <strong style="color:var(--cyan);text-shadow:0 0 10px rgba(0,245,255,.4)">"The Infinity Glove,"</strong> a patented assistive technology transforming communication for individuals with hearing and speech impairments. AI specialist with deep expertise in prompt engineering and autonomous agent development.
+          </div>
+        </div>
+        <div class="hero-avatar-wrap">
+          <div class="hex-avatar-wrap" title="Wassim Omran">
+            <div class="hex-ring2"></div>
+            <div class="hex-ring"></div>
+            <div class="hex-avatar"><img src="me.JPG" alt="Wassim Omran" draggable="false"></div>
+            <div class="hex-scan"></div>
+          </div>
+          <div class="avatar-id">ID :: WO-001</div>
+          <div class="avatar-id" style="color:var(--green);margin-top:-4px;">● ONLINE</div>
+        </div>
       </div>
     </div>
   </div>
@@ -544,9 +679,30 @@ body.blueprint #bpModeLabel{display:block;}
     <div class="stat" data-t="8"><div class="snum">0</div><div class="slabel">YEARS EXPERIENCE</div></div>
     <div class="stat" data-t="7"><div class="snum">0</div><div class="slabel">PRODUCTION LINES</div></div>
     <div class="stat" data-t="3"><div class="snum">0</div><div class="slabel">DEGREES & CERTS</div></div>
-    <div class="stat" data-t="1"><div class="snum">0</div><div class="slabel">PATENT HOLDER</div></div>
-    <div class="stat" data-t="5"><div class="snum">0</div><div class="slabel">CONFERENCES</div></div>
+    <div class="stat clickable" data-t="1" id="statPatent"><div class="snum">0</div><div class="slabel">PATENT HOLDER</div></div>
+    <div class="stat clickable" data-t="5" id="statConf"><div class="snum">0</div><div class="slabel">CONFERENCES</div></div>
     <div class="stat" data-t="3"><div class="snum">0</div><div class="slabel">LANGUAGES</div></div>
+  </div>
+
+  <!-- PATENT BADGE -->
+  <div class="section" id="patentBadge">
+    <div class="shead"><div class="snum2">✋</div><div class="stitle">Innovation Patent</div><div class="sline"></div></div>
+    <div class="patent-card">
+      <div class="patent-left">
+        <div class="patent-num">PATENT NO. LB / 2023 / INF-001</div>
+        <div class="patent-title">THE INFINITY GLOVE</div>
+        <div class="patent-holder">INVENTOR :: WASSIM OMRAN · FILED 2023 · ACTIVE</div>
+        <div class="patent-desc">A wearable sign language translation device that interprets hand gestures and finger movements in real time, converting them into text and audio output. Designed to eliminate communication barriers for individuals with hearing and speech impairments. Went viral across Lebanon, the Middle East, and global tech media.</div>
+      </div>
+      <div class="patent-stamp-wrap">
+        <div class="patent-stamp" id="patentStamp">
+          <div class="stamp-check">✓</div>
+          <div class="stamp-text">VERIFIED</div>
+          <div class="stamp-text">PATENT</div>
+        </div>
+        <div class="patent-chip">ACTIVE</div>
+      </div>
+    </div>
   </div>
 
   <!-- EXPERIENCE -->
@@ -604,6 +760,27 @@ body.blueprint #bpModeLabel{display:block;}
       <div class="lcard" style="--pct:95%"><div class="lname">English</div><div class="llv">FLUENT</div><div class="lbar"><div class="lbf"></div></div></div>
       <div class="lcard" style="--pct:55%"><div class="lname">French</div><div class="llv">INTERMEDIATE</div><div class="lbar"><div class="lbf"></div></div></div>
     </div>
+  </div>
+
+  <!-- MEDIA MENTIONS -->
+  <div class="section" id="mediaSection">
+    <div class="shead"><div class="snum2">📺</div><div class="stitle">Media Coverage</div><div class="sline"></div></div>
+    <div class="media-marquee-outer">
+      <div class="media-track" id="mediaTrack">
+        <div class="media-logo"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"></div>
+        <div class="media-logo"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"></div>
+        <div class="media-logo"><img src="aljazeera.png" alt="Al Jazeera"></div>
+        <div class="media-logo"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"></div>
+        <div class="media-logo"><img src="aljadeed.jpeg" alt="Al Jadeed"></div>
+        <!-- duplicate for seamless loop -->
+        <div class="media-logo"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"></div>
+        <div class="media-logo"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"></div>
+        <div class="media-logo"><img src="aljazeera.png" alt="Al Jazeera"></div>
+        <div class="media-logo"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"></div>
+        <div class="media-logo"><img src="aljadeed.jpeg" alt="Al Jadeed"></div>
+      </div>
+    </div>
+    <div class="media-caption">◈ AS FEATURED IN ◈</div>
   </div>
 
   <!-- TIMELINE -->
@@ -1622,6 +1799,215 @@ window.addEventListener('scroll',()=>{
     });
   },{threshold:.1});
   tlObs.observe(document.getElementById('timelineSection'));
+})();
+
+// ═══════════════════════════════════════════════════
+// CLICKABLE STATS + CONFERENCES MODAL + PATENT STAMP
+// ═══════════════════════════════════════════════════
+(function(){
+  // Patent stat → open glove modal
+  const statPatent=document.getElementById('statPatent');
+  if(statPatent){
+    statPatent.addEventListener('click',()=>{
+      const m=document.getElementById('gloveModal');
+      if(m){m.style.display='flex';unlock('inventor');playClick();}
+    });
+    statPatent.addEventListener('touchend',e=>{
+      e.preventDefault();
+      const m=document.getElementById('gloveModal');
+      if(m){m.style.display='flex';unlock('inventor');playClick();}
+    });
+  }
+
+  // Conferences stat → open conf modal
+  const statConf=document.getElementById('statConf');
+  const confModal=document.getElementById('confModal');
+  const confClose=document.getElementById('confModalClose');
+  const confBg=document.getElementById('confModalBg');
+  function openConf(){confModal.style.display='flex';playClick();}
+  function closeConf(){confModal.style.display='none';}
+  if(statConf)statConf.addEventListener('click',openConf);
+  if(statConf)statConf.addEventListener('touchend',e=>{e.preventDefault();openConf();});
+  if(confClose)confClose.addEventListener('click',closeConf);
+  if(confBg)confBg.addEventListener('click',closeConf);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&confModal&&confModal.style.display!=='none')closeConf();});
+
+  // Patent stamp animation on scroll into view
+  const stamp=document.getElementById('patentStamp');
+  const patentSection=document.getElementById('patentBadge');
+  if(stamp&&patentSection){
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          setTimeout(()=>{
+            stamp.classList.add('stamped');
+            playBeep(900,.12,.06,'sine');
+            setTimeout(()=>playBeep(1100,.1,.05,'sine'),80);
+          },600);
+          obs.unobserve(patentSection);
+        }
+      });
+    },{threshold:.3});
+    obs.observe(patentSection);
+  }
+})();
+
+// ═══════════════════════════════════════════════════
+// MOBILE EASTER EGGS
+// ═══════════════════════════════════════════════════
+(function(){
+
+  // ── Helper: floating toast label ──
+  function flashMsg(html,duration=2800){
+    const d=document.createElement('div');
+    d.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.85);z-index:9500;font-family:Orbitron,monospace;text-align:center;pointer-events:none;opacity:0;transition:opacity .3s,transform .3s;padding:18px 26px;background:rgba(0,8,20,.97);border:1px solid var(--cyan);border-radius:8px;box-shadow:0 0 40px rgba(0,245,255,.3);max-width:80vw;';
+    d.innerHTML=html;
+    document.body.appendChild(d);
+    requestAnimationFrame(()=>{d.style.opacity='1';d.style.transform='translate(-50%,-50%) scale(1)';});
+    setTimeout(()=>{d.style.opacity='0';d.style.transform='translate(-50%,-50%) scale(.9)';setTimeout(()=>d.remove(),350);},duration);
+  }
+
+  // ── 1. SHAKE → Matrix rain ──
+  let lastShakeTime=0,shakeTriggered=false;
+  const SHAKE_THRESHOLD=18;
+  let lastX=0,lastY=0,lastZ=0;
+  window.addEventListener('devicemotion',e=>{
+    const acc=e.accelerationIncludingGravity;
+    if(!acc)return;
+    const dx=Math.abs((acc.x||0)-lastX),dy=Math.abs((acc.y||0)-lastY),dz=Math.abs((acc.z||0)-lastZ);
+    lastX=acc.x||0;lastY=acc.y||0;lastZ=acc.z||0;
+    const force=dx+dy+dz;
+    const now=Date.now();
+    if(force>SHAKE_THRESHOLD&&now-lastShakeTime>3000){
+      lastShakeTime=now;
+      unlock('konami');
+      doMatrix();
+      flashMsg('<div style="font-size:clamp(13px,4vw,18px);color:var(--cyan);text-shadow:0 0 20px var(--cyan);font-weight:900;letter-spacing:3px;">📳 SHAKE DETECTED</div><div style="font-size:clamp(9px,2.5vw,11px);color:rgba(0,245,255,.6);letter-spacing:2px;margin-top:8px;">MATRIX MODE ACTIVATED</div>');
+      if(soundOn)playBeep(220,.35,.07,'sawtooth');
+    }
+  });
+  // iOS requires permission for DeviceMotion
+  if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){
+    // Add a silent request on first touch
+    let motionPermAsked=false;
+    document.addEventListener('touchstart',()=>{
+      if(motionPermAsked)return;motionPermAsked=true;
+      DeviceMotionEvent.requestPermission().catch(()=>{});
+    },{once:true,passive:true});
+  }
+
+  // ── 2. TRIPLE-TAP hero name → particle explosion ──
+  const nameWrap=document.getElementById('nameWrap');
+  if(nameWrap){
+    let tapCount=0,tapTimer=null;
+    nameWrap.addEventListener('touchend',e=>{
+      tapCount++;
+      clearTimeout(tapTimer);
+      tapTimer=setTimeout(()=>{
+        if(tapCount>=3){
+          // trigger the existing explode function by dispatching a click
+          nameWrap.dispatchEvent(new MouseEvent('click',{bubbles:true}));
+          flashMsg('<div style="font-size:clamp(13px,4vw,18px);color:var(--cyan);font-weight:900;letter-spacing:3px;">💥 NAME EXPLODED</div><div style="font-size:clamp(9px,2.5vw,11px);color:rgba(0,245,255,.6);letter-spacing:2px;margin-top:8px;">TRIPLE-TAP EASTER EGG</div>');
+        }
+        tapCount=0;
+      },420);
+    },{passive:true});
+  }
+
+  // ── 3. LONG PRESS Infinity Glove card → classified modal ──
+  const gloveCard=document.getElementById('gloveCard');
+  if(gloveCard){
+    let gloveTimer=null;
+    gloveCard.addEventListener('touchstart',()=>{
+      gloveTimer=setTimeout(()=>{
+        // Show classified reveal flash before opening modal
+        const flash=document.createElement('div');
+        flash.style.cssText='position:fixed;inset:0;z-index:4999;background:rgba(0,245,255,.12);pointer-events:none;animation:classFlash .4s ease-out forwards;';
+        const fs=document.createElement('style');
+        fs.textContent='@keyframes classFlash{0%{opacity:1;}100%{opacity:0;}}';
+        document.head.appendChild(fs);document.body.appendChild(flash);
+        setTimeout(()=>flash.remove(),450);
+        flashMsg('<div style="font-size:clamp(11px,3.5vw,15px);color:#ff4444;font-weight:900;letter-spacing:4px;text-shadow:0 0 20px #ff4444;">🔓 CLASSIFIED ACCESS</div><div style="font-size:clamp(9px,2.5vw,11px);color:rgba(255,100,100,.7);letter-spacing:2px;margin-top:8px;">CLEARANCE LEVEL: ALPHA</div>',1600);
+        setTimeout(()=>{
+          const modal=document.getElementById('gloveModal');
+          if(modal){modal.style.display='flex';unlock('inventor');playBeep(300,.2,.08,'sawtooth');}
+        },700);
+      },600);
+    },{passive:true});
+    gloveCard.addEventListener('touchend',()=>clearTimeout(gloveTimer),{passive:true});
+    gloveCard.addEventListener('touchmove',()=>clearTimeout(gloveTimer),{passive:true});
+  }
+
+  // ── 4. FIVE RAPID TAPS on hero card → GITEX mode ──
+  const heroCard=document.getElementById('heroCard');
+  if(heroCard){
+    let heroTaps=0,heroTimer=null;
+    heroCard.addEventListener('touchend',e=>{
+      // Only count if not on nameWrap/gloveCard to avoid conflicts
+      heroTaps++;
+      clearTimeout(heroTimer);
+      heroTimer=setTimeout(()=>{
+        if(heroTaps>=5){
+          doGitexMode();
+          flashMsg('<div style="font-size:clamp(13px,4vw,18px);color:#ffcc00;font-weight:900;letter-spacing:3px;text-shadow:0 0 20px #ffcc00;">⚡ GITEX MODE</div><div style="font-size:clamp(9px,2.5vw,11px);color:rgba(255,200,0,.7);letter-spacing:2px;margin-top:8px;">5-TAP EASTER EGG UNLOCKED</div>');
+        }
+        heroTaps=0;
+      },600);
+    },{passive:true});
+  }
+
+  // ── 5. TWO-FINGER SWIPE DOWN → Blueprint Mode ──
+  let tfStartY=null,tfCount=0;
+  document.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){tfStartY=(e.touches[0].clientY+e.touches[1].clientY)/2;tfCount=2;}
+    else{tfStartY=null;tfCount=0;}
+  },{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(tfCount===2&&tfStartY!==null){
+      const endY=(e.changedTouches[0].clientY+((e.changedTouches[1]||e.changedTouches[0]).clientY))/2;
+      const dy=endY-tfStartY;
+      if(dy>60){
+        // Two-finger swipe down → toggle blueprint
+        document.getElementById('bpBtn').click();
+        const bpOn=document.body.classList.contains('blueprint');
+        flashMsg(`<div style="font-size:clamp(11px,3.5vw,15px);color:var(--cyan);font-weight:900;letter-spacing:3px;">📐 BLUEPRINT MODE ${bpOn?'ON':'OFF'}</div><div style="font-size:clamp(9px,2.5vw,11px);color:rgba(0,245,255,.6);letter-spacing:2px;margin-top:8px;">TWO-FINGER SWIPE DOWN</div>`);
+      }
+      tfStartY=null;tfCount=0;
+    }
+  },{passive:true});
+
+  // ── 6. LONG PRESS GLOBE → Globe Trotter achievement + ping burst ──
+  const globeCanvas=document.getElementById('globeCanvas');
+  if(globeCanvas){
+    let globeTimer=null;
+    globeCanvas.addEventListener('touchstart',()=>{
+      globeTimer=setTimeout(()=>{
+        unlock('globe');
+        // Ping burst rings around globe
+        const rect=globeCanvas.getBoundingClientRect();
+        const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2+window.scrollY;
+        for(let i=0;i<4;i++){
+          setTimeout(()=>{
+            const ring=document.createElement('div');
+            ring.style.cssText=`position:absolute;left:${cx}px;top:${cy}px;width:0;height:0;border-radius:50%;border:2px solid rgba(0,245,255,.8);transform:translate(-50%,-50%);pointer-events:none;z-index:200;animation:globePing .9s ease-out forwards;`;
+            document.body.appendChild(ring);
+            setTimeout(()=>ring.remove(),950);
+          },i*180);
+        }
+        const pStyle=document.createElement('style');
+        if(!document.getElementById('globePingStyle')){
+          pStyle.id='globePingStyle';
+          pStyle.textContent='@keyframes globePing{0%{width:0;height:0;opacity:.9;}100%{width:320px;height:320px;opacity:0;}}';
+          document.head.appendChild(pStyle);
+        }
+        flashMsg('<div style="font-size:clamp(13px,4vw,18px);color:var(--cyan);font-weight:900;letter-spacing:3px;">🌍 GLOBE TROTTER</div><div style="font-size:clamp(9px,2.5vw,11px);color:rgba(0,245,255,.6);letter-spacing:2px;margin-top:8px;">LONG PRESS ACHIEVEMENT UNLOCKED</div>');
+        playAch();
+      },700);
+    },{passive:true});
+    globeCanvas.addEventListener('touchend',()=>clearTimeout(globeTimer),{passive:true});
+    globeCanvas.addEventListener('touchmove',()=>clearTimeout(globeTimer),{passive:true});
+  }
+
 })();
 </script>
 </body>
