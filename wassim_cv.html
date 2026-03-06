@@ -725,7 +725,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 <div id="achWrap"></div>
 
 <!-- SOUND BUTTON -->
-<div id="sndBtn" title="Toggle sound" onclick="toggleSound()">🔊</div>
+<div id="sndBtn" title="Toggle sound" onclick="toggleSound()" ontouchend="event.preventDefault();toggleSound()">🔊</div>
 
 <!-- AI CHAT BUTTON -->
 <div id="chatBtn"><div class="aipulse"></div>TALK TO MY CV</div>
@@ -1086,32 +1086,33 @@ function toggleSound(){
   const btn=document.getElementById('sndBtn');
   if(soundOn){
     btn.textContent='🔊';btn.classList.remove('muted');
-    initAudio();
+    startAudio();
   }else{
     btn.textContent='🔇';btn.classList.add('muted');
     if(humNode){try{humNode.stop();}catch(e){}humNode=null;}
   }
 }
-function initAudio(){
-  if(audioCtx)return;
-  try{
-    // Creating AudioContext INSIDE a gesture handler (click/touchstart) makes it
-    // start in 'running' state on iOS Safari and Android Chrome — no resume() needed
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    humNode=ambientHum();
-    playBoot();
-  }catch(e){audioCtx=null;}
+function startAudio(){
+  // Create context if needed — must be called from a real (non-passive) gesture
+  if(!audioCtx){
+    try{ audioCtx=new(window.AudioContext||window.webkitAudioContext)(); }
+    catch(e){ audioCtx=null; return; }
+  }
+  // Synchronously resume — works on iOS inside genuine click/touchend handler
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  // Start hum and boot sounds
+  if(!humNode) humNode=ambientHum();
+  playBoot();
 }
-// Trigger on touchstart (not touchend) — keeps iOS gesture context intact
-['click','touchstart','keydown'].forEach(ev=>
-  window.addEventListener(ev,()=>initAudio(),{once:true,passive:true})
-);
-// Resume if context suspended (e.g. returning from another tab/PDF)
+// Desktop: auto-init on first click anywhere (non-passive = real gesture)
+window.addEventListener('click',()=>{ if(!audioCtx) startAudio(); },{once:true});
+// Resume if coming back from another tab / PDF
 document.addEventListener('visibilitychange',()=>{
-  if(!document.hidden&&audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
+  if(!document.hidden&&audioCtx&&audioCtx.state==='suspended') audioCtx.resume();
 });
+// Keep alive on touch (doesn't create ctx, just resumes if suspended)
 window.addEventListener('touchstart',()=>{
-  if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
+  if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume();
 },{passive:true});
 function playBeep(freq=440,dur=0.08,vol=0.04,type='sine'){
   if(!soundOn||!audioCtx)return;
