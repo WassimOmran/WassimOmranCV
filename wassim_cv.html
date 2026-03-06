@@ -349,12 +349,77 @@ body.blueprint #bpModeLabel{display:block;}
 #tlYear{font-family:'Orbitron',monospace;font-size:13px;color:var(--cyan);text-align:center;margin-top:14px;letter-spacing:3px;}
 
 @media(max-width:600px){
-  .hero-card{padding:26px 20px;}
+  .hero-card{padding:22px 16px;}
   .hud{display:none;}
-  #chatPanel{width:calc(100vw - 32px);right:16px;}
-  #chatBtn{right:16px;bottom:16px;}
+  #chatPanel{width:calc(100vw - 32px);right:16px;bottom:72px;}
+  #chatBtn{right:16px;bottom:16px;padding:10px 16px;font-size:11px;}
   #soundBtn{left:16px;bottom:16px;}
+  #main{padding:40px 14px 100px;}
+  .hname{font-size:clamp(24px,10vw,44px);letter-spacing:1px;}
+  .htyped{font-size:14px;}
+  .hmeta{gap:10px;font-size:10px;}
+  .hbio{font-size:13px;}
+  .stats{grid-template-columns:repeat(2,1fr);display:grid;gap:10px;}
+  .stat{min-width:unset;}
+  .snum{font-size:24px;}
+  .egrid{grid-template-columns:1fr;}
+  .skgrid{grid-template-columns:1fr;}
+  .lgrid{gap:10px;}
+  .lcard{min-width:unset;flex:1;padding:16px 18px;}
+  .ecard{padding:16px 18px;}
+  .edc{padding:16px;}
+  .shead{gap:10px;}
+  .stitle{font-size:11px;letter-spacing:3px;}
+  #tlWrap{padding:16px 0 40px;}
+  #tlCard{margin:24px 10px 0;padding:16px 18px;}
+  #chatBtn .aipulse{display:none;}
+  .blines{font-size:10px;}
+  .blogo{font-size:clamp(22px,8vw,48px);letter-spacing:4px;}
+  #bpBtn{font-size:9px;padding:6px 12px;}
+  #globeCanvas{width:260px;height:260px;}
+  .hero-card::before,.hero-card::after{display:none;}
 }
+@media(max-width:380px){
+  .stats{grid-template-columns:1fr 1fr;}
+  .hname{font-size:clamp(20px,9vw,36px);}
+  #chatBtn{padding:9px 12px;letter-spacing:1px;}
+}
+
+/* ── GLOVE MODAL ── */
+#gloveModal{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;}
+#gloveModalBg{position:absolute;inset:0;background:rgba(0,2,8,.92);backdrop-filter:blur(6px);cursor:pointer;}
+#gloveModalBox{
+  position:relative;z-index:1;
+  background:linear-gradient(135deg,rgba(0,18,38,.99),rgba(0,6,18,.99));
+  border:1px solid var(--cyan);border-radius:8px;
+  width:min(420px,92vw);overflow:hidden;
+  box-shadow:0 0 60px rgba(0,245,255,.25),0 0 120px rgba(0,100,200,.1);
+  animation:modalIn .35s cubic-bezier(.175,.885,.32,1.275) forwards;
+}
+@keyframes modalIn{from{transform:scale(.88) translateY(20px);opacity:0;}to{transform:none;opacity:1;}}
+.gm-head{
+  padding:16px 20px;border-bottom:1px solid rgba(0,245,255,.15);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;
+  background:rgba(0,245,255,.04);
+}
+.gm-title{font-family:'Orbitron',monospace;font-size:13px;color:var(--cyan);letter-spacing:3px;font-weight:700;}
+.gm-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.45);letter-spacing:2px;flex-basis:100%;}
+#gloveModalClose{color:rgba(0,245,255,.5);cursor:pointer;font-size:22px;line-height:1;transition:color .2s;padding:0 4px;position:absolute;top:14px;right:16px;}
+#gloveModalClose:hover{color:var(--cyan);}
+.gm-body{padding:16px 20px 20px;}
+.gm-iframe-wrap{
+  position:relative;padding-top:178%;border-radius:6px;overflow:hidden;
+  background:#000;border:1px solid rgba(0,245,255,.12);
+}
+.gm-iframe-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.gm-watch-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-top:14px;background:linear-gradient(135deg,rgba(0,20,40,.97),rgba(0,8,20,.99));
+  border:1px solid var(--cyan);border-radius:4px;padding:12px;
+  font-family:'Orbitron',monospace;font-size:11px;color:var(--cyan);
+  text-decoration:none;letter-spacing:3px;transition:box-shadow .3s,background .2s;
+}
+.gm-watch-btn:hover{box-shadow:0 0 24px rgba(0,245,255,.3);background:rgba(0,245,255,.06);}
 </style>
 </head>
 <body>
@@ -374,7 +439,6 @@ body.blueprint #bpModeLabel{display:block;}
 <!-- HUD -->
 <div class="hud" id="htl">UNIT :: WO-001<br>CLEARANCE :: <span style="color:var(--cyan)">ALPHA</span><br>STATUS :: <span class="hdot"></span>ONLINE</div>
 <div class="hud" id="htr"><span id="hudTime">--:--:--</span><br>SAU · DAMMAM<br>FPS :: <span id="hudFps">60</span></div>
-<div class="hud" id="hbl">ENGINE :: v4.0 FINAL<br>RENDER :: 3D+AI</div>
 <div class="hud" id="hbr">SCROLL :: <span id="hudScroll">0%</span><br>ACH :: <span id="hudAch">0</span>/7</div>
 
 <!-- BOOT -->
@@ -428,6 +492,24 @@ body.blueprint #bpModeLabel{display:block;}
   </div>
 </div>
 
+<!-- GLOVE MODAL -->
+<div id="gloveModal" style="display:none;">
+  <div id="gloveModalBg"></div>
+  <div id="gloveModalBox">
+    <div class="gm-head">
+      <div class="gm-title">✋ THE INFINITY GLOVE</div>
+      <div class="gm-sub">PATENT HOLDER · VIRAL IN THE MIDDLE EAST · GITEX SHOWCASE</div>
+      <div id="gloveModalClose">✕</div>
+    </div>
+    <div class="gm-body">
+      <div class="gm-iframe-wrap">
+        <iframe src="https://www.instagram.com/reel/C-xCFHJtqcU/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="autoplay; encrypted-media"></iframe>
+      </div>
+      <a href="https://www.instagram.com/reel/C-xCFHJtqcU/?igsh=MXF3NGpveDc0enQ2aA==" target="_blank" rel="noopener" class="gm-watch-btn">▶ WATCH ON INSTAGRAM</a>
+    </div>
+  </div>
+</div>
+
 <!-- MAIN -->
 <div id="main">
 
@@ -448,7 +530,7 @@ body.blueprint #bpModeLabel{display:block;}
         <span>📞 +966 050 951 7855</span>
         <span>📞 +961 70 266 236</span>
         <a href="mailto:wassimomran62@gmail.com">✉ wassimomran62@gmail.com</a>
-        <a href="#">🔗 LinkedIn</a>
+        <a href="https://www.linkedin.com/in/wassimomran" target="_blank" rel="noopener">🔗 LinkedIn</a>
         <span>📅 DOB 30/01/2001</span>
       </div>
       <div class="hbio para-layer" data-speed="0.15">
@@ -472,7 +554,7 @@ body.blueprint #bpModeLabel{display:block;}
     <div class="shead"><div class="snum2">01</div><div class="stitle">Experience</div><div class="sline"></div></div>
     <div class="ecard" data-ach="engineer"><div class="etitle">Process & Line Senior Coordinator</div><div class="esub">◈ NAPCO Consumer · Saudi Arabia · Oct 2025 – Present</div><ul><li>Lead machine vision inspection across 7 high-speed production lines using AccuSentry systems</li><li>Spearheading centralized data collection infrastructure to unify quality metrics across all lines</li><li>Develop Python scripts for defect analysis and inspection parameter optimization</li><li>Configure multi-camera systems and PLC integration for real-time quality control</li></ul></div>
     <div class="ecard"><div class="etitle">AI Prompt Engineer & Agent Developer</div><div class="esub">◈ Freelance / Independent · Jan 2024 – Present</div><ul><li>Design and deploy autonomous AI agents using AutoGPT and custom multi-agent pipelines</li><li>Craft advanced prompt engineering strategies including RAG techniques</li><li>Build AI-powered workflows integrating GPT-4, Claude, Gemini with external APIs</li><li>Develop domain-specific AI assistants for industrial, medical, and business applications</li></ul></div>
-    <div class="ecard" data-ach="inventor"><div class="etitle">Entrepreneur — "The Infinity Glove" ✋</div><div class="esub">◈ Patent Holder · Jan 2023 – Jan 2026</div><ul><li>Designed and patented a sign language translation glove for hearing/speech impaired individuals</li><li>Gained viral media coverage across Lebanon and the Middle East</li><li>Showcased at GITEX, Step Conference, Youth X, MBRIF, and Global Student Entrepreneur Awards</li></ul></div>
+    <div class="ecard" data-ach="inventor" id="gloveCard" style="cursor:pointer;" title="Click to see The Infinity Glove in action"><div class="etitle">Entrepreneur — "The Infinity Glove" ✋ <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.5);letter-spacing:2px;">[CLICK TO WATCH ▶]</span></div><div class="esub">◈ Patent Holder · Jan 2023 – Jan 2026</div><ul><li>Designed and patented a sign language translation glove for hearing/speech impaired individuals</li><li>Gained viral media coverage across Lebanon and the Middle East</li><li>Showcased at GITEX, Step Conference, Youth X, MBRIF, and Global Student Entrepreneur Awards</li></ul></div>
     <div class="ecard"><div class="etitle">Entrepreneur — Krono Digital Agency</div><div class="esub">◈ Founder · Jan 2023 – Jan 2026</div><ul><li>Founded digital agency specializing in web design and mobile app development</li></ul></div>
     <div class="ecard"><div class="etitle">QA/QC Engineer</div><div class="esub">◈ MASQ Lighting Company · Jun 2024 – Mar 2025</div><ul><li>Enhanced lighting designs focusing on innovation and efficiency</li><li>Resolved quality issues ensuring flawless product delivery</li></ul></div>
     <div class="ecard"><div class="etitle">Biomedical Engineer</div><div class="esub">◈ NINI Hospital, Lebanon · Oct 2023 – May 2024</div><ul><li>Managed upkeep of critical medical devices</li><li>Enhanced operational efficiency through preventive maintenance</li></ul></div>
@@ -725,20 +807,37 @@ setTimeout(nextBLine,1300);
 
 function doGlitch(){
   const g=document.getElementById('glitchOv');
-  let n=0;const times=[0,25,50,80,110,140,160,180];
+  const boot=document.getElementById('boot');
+  let n=0;
+  const times=[0,30,55,85,115,145,170,195,215,235,255];
+  // Add shake style
+  const shk=document.createElement('style');
+  shk.textContent='@keyframes bootShake{0%,100%{transform:none;}20%{transform:translateX(-6px) skewX(-3deg);}40%{transform:translateX(8px) skewX(2deg);}60%{transform:translateX(-4px);}80%{transform:translateX(3px);}}';
+  document.head.appendChild(shk);
+  boot.style.animation='bootShake 0.35s ease-out';
   function step(){
     if(n>=times.length){
-      document.getElementById('boot').style.cssText='transition:opacity .5s;opacity:0;';
+      // Final cyan flash — hard cut to main
+      g.style.transition='none';
+      g.style.opacity='1';
+      g.style.background='rgba(0,245,255,0.9)';
+      g.style.transform='none';
+      boot.style.opacity='0';
       setTimeout(()=>{
-        document.getElementById('boot').style.display='none';
+        boot.style.display='none';
         document.getElementById('main').classList.add('vis');
+        g.style.transition='opacity 0.55s';
+        g.style.opacity='0';
+        g.style.background='var(--cyan)';
         startTyping();observeAll();buildGlobe();buildViz();addWipeEffect();
-      },500);
+      },55);
       return;
     }
-    g.style.opacity=n%2?.14:'0';
-    g.style.transform=`translateX(${(Math.random()-.5)*10}px) skewX(${(Math.random()-.5)*5}deg)`;
-    n++;setTimeout(step,times[n]||35);
+    const intense=n>7;
+    g.style.opacity=n%2?(intense?.35:.18):'0';
+    g.style.background=n%3===0?'rgba(0,245,255,0.8)':'rgba(255,0,50,0.4)';
+    g.style.transform=`translateX(${(Math.random()-.5)*(intense?24:12)}px) skewX(${(Math.random()-.5)*(intense?10:5)}deg) scaleY(${1+(Math.random()-.5)*.12})`;
+    n++;setTimeout(step,times[n]||25);
   }
   step();
 }
@@ -1054,6 +1153,31 @@ const chatMsgs=document.getElementById('chatMsgs'),chatInput=document.getElement
 const chatSend=document.getElementById('chatSend'),chatSugs=document.getElementById('chatSugs');
 let chatOpen=false;
 
+// ── LOCAL Q&A (keyword-based, works offline) ──
+const LOCAL_QA=[
+  {keys:['infinity glove','glove','patent','invent'],reply:"The Infinity Glove is my proudest achievement — a patented sign language translation glove that converts hand gestures into text and speech in real time. I designed it to break communication barriers for individuals with hearing and speech impairments. It went viral across Lebanon and the Middle East, and I showcased it at GITEX, Step Conference, MBRIF, Youth X, and the Global Student Entrepreneur Awards. 🧤✨"},
+  {keys:['gitex','conference','showcase','exhibit','step conference','mbrif'],reply:"GITEX was surreal — standing at the world's largest tech show in Dubai, presenting The Infinity Glove to thousands of tech leaders and investors. I also showcased at Step Conference, Youth X, MBRIF (Mohammed Bin Rashid Innovation Fund), and the Global Student Entrepreneur Awards. These stages shaped my entrepreneurial mindset profoundly. ⚡",gitex:true},
+  {keys:['napco','current job','current role','machine vision','accusentry','production','coordinator'],reply:"Right now I'm the Process & Line Senior Coordinator at NAPCO Consumer in Saudi Arabia. I lead machine vision inspection across 7 high-speed production lines using AccuSentry systems. My days involve Python scripting for defect analysis, PLC integration, and building centralized data infrastructure to unify quality metrics across all lines — where industrial engineering meets AI in real time! 🏭"},
+  {keys:['ai','prompt','agent','llm','gpt','claude','gemini','langchain','autogpt','rag'],reply:"AI is my second passion alongside electrical engineering. I design autonomous AI agents, build RAG pipelines, and craft advanced prompts for real-world business applications. I work with GPT-4, Claude, Gemini, LangChain, and AutoGPT — integrating them into industrial, medical, and business workflows. The right architecture can automate almost anything."},
+  {keys:['skill','python','plc','matlab','pytorch','c++','technical'],reply:"My stack spans hardware and software: Python, PLC programming, PyTorch, MATLAB, C++, Arduino, AutoCAD, and ETAP on the engineering side — plus LangChain, AutoGPT, RAG, and LLM integration on the AI side. AccuSentry for machine vision ties it all together. This mix lets me bridge the physical world of machines with digital intelligence uniquely."},
+  {keys:['education','degree','master','bachelor','university','balamand','ndu','gpa','grade'],reply:"I hold a Master's in Electrical Engineering from the University of Balamand (GPA 85/100) and a Bachelor's from Notre Dame University Louaize (GPA 3.5/4 — and I won the Most Talented Alumni Trophy 🏆). I also completed a Startup Pathway Certificate at AEIC/American University of Dubai with Grade A (90.64%)."},
+  {keys:['language','arabic','english','french','speak'],reply:"I speak Arabic as my native tongue, English fluently, and French at an intermediate level. Working across Lebanon, Saudi Arabia, and the UAE means multilingual communication is part of every day."},
+  {keys:['contact','email','phone','reach','hire','work with','opportunity'],reply:"Best way to reach me: wassimomran62@gmail.com or call +966 050 951 7855. I'm always open to exciting engineering and AI opportunities — innovation projects, consulting, or joining a team pushing the boundaries of technology. Let's build something together! 🚀"},
+  {keys:['krono','agency','web','app','digital','startup','founder'],reply:"I founded Krono Digital Agency, specializing in web design and mobile app development. Building the agency taught me end-to-end project management, leading creative teams, and delivering polished digital products — skills that complement my engineering work perfectly."},
+  {keys:['biomedical','hospital','nini','medical device'],reply:"I worked as a Biomedical Engineer at NINI Hospital in Lebanon, maintaining critical medical devices and running preventive maintenance programmes. Knowing the equipment I serviced was keeping patients alive made me take quality control very seriously — and that mindset carries into everything I do."},
+  {keys:['unique','special','different','stand out','interesting'],reply:"What makes me unique? The combination — I'm not just an engineer, not just an AI developer, not just an entrepreneur. I invented a patented assistive technology that went viral globally, while simultaneously building industrial AI systems and autonomous agents. I bridge the physical world of machines with the digital world of intelligence. That crossover is where real innovation lives."},
+  {keys:['hello','hi','hey','who are you','what are you'],reply:"Hey! I'm Wassim Omran — electrical engineer, AI specialist, machine vision expert, and inventor of The Infinity Glove. Currently based in Saudi Arabia at NAPCO Consumer. Ask me about my projects, skills, the patent, GITEX, or anything on my CV! 🚀"},
+];
+function getLocalReply(text){
+  const t=text.toLowerCase();
+  let matched=null;
+  for(const qa of LOCAL_QA){
+    if(qa.keys.some(k=>t.includes(k))){matched=qa;break;}
+  }
+  if(matched?.gitex)setTimeout(doGitexMode,800);
+  return matched?.reply||"Great question! I'm Wassim Omran — electrical engineer, AI specialist, and inventor of The Infinity Glove. Feel free to ask about my experience at NAPCO, my AI projects, the patent journey, GITEX, or my education. I'd love to tell you more! 🚀";
+}
+
 const SYSTEM_PROMPT=`You are Wassim Omran's interactive CV assistant. You speak as if you are Wassim himself — first person, confident, passionate, and professional. You are an electrical engineer, AI specialist, and inventor.
 
 Key facts about Wassim:
@@ -1103,30 +1227,74 @@ async function sendMsg(){
   chatSugs.style.display='none';
   addMsg(txt,'user');
   const typing=addTyping();
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:300,
-        system:SYSTEM_PROMPT,
-        messages:[{role:'user',content:txt}]
-      })
-    });
-    const data=await res.json();
+  // Small delay for realism, then use local Q&A
+  setTimeout(()=>{
     typing.remove();
-    const reply=data.content?.[0]?.text||"Sorry, I couldn't connect right now. Try again!";
+    const reply=getLocalReply(txt);
     addMsg(reply,'ai');
     playBeep(500,.1,.04,'sine');
-  }catch(e){
-    typing.remove();
-    addMsg("Connection issue — but I'm Wassim, an electrical engineer & AI specialist based in Saudi Arabia. Ask me about my projects!",'ai');
-  }
-  chatSend.disabled=false;
+    chatSend.disabled=false;
+  },700+Math.random()*400);
 }
 chatSend.addEventListener('click',sendMsg);
 chatInput.addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
+
+// ═══════════════════════════════════════════════════
+// GITEX MODE EASTER EGG
+// ═══════════════════════════════════════════════════
+function doGitexMode(){
+  if(document.getElementById('gitexOverlay'))return;
+  const overlay=document.createElement('div');
+  overlay.id='gitexOverlay';
+  overlay.style.cssText='position:fixed;inset:0;z-index:8000;pointer-events:none;background:radial-gradient(ellipse 40% 60% at 50% 25%,rgba(255,200,0,.18) 0%,rgba(0,0,0,.88) 100%);animation:gitexFade 6s ease-in-out forwards;';
+  const cConf=document.createElement('canvas');
+  cConf.style.cssText='position:fixed;inset:0;z-index:8001;pointer-events:none;';
+  cConf.width=innerWidth;cConf.height=innerHeight;
+  const label=document.createElement('div');
+  label.style.cssText='position:fixed;top:38%;left:50%;transform:translate(-50%,-50%);z-index:8002;font-family:Orbitron,monospace;text-align:center;pointer-events:none;animation:gitexFade 6s ease-in-out forwards;';
+  label.innerHTML='<div style="font-size:clamp(18px,4vw,42px);color:#ffcc00;text-shadow:0 0 30px #ffcc00,0 0 60px rgba(255,200,0,.5);font-weight:900;letter-spacing:6px;">⚡ GITEX GLOBAL ⚡</div><div style="font-size:clamp(9px,1.5vw,13px);color:rgba(255,200,0,.75);letter-spacing:4px;margin-top:12px;font-family:Share Tech Mono,monospace;">WORLD\'S LARGEST TECH SHOW · THE INFINITY GLOVE SHOWCASE</div><div style="font-size:clamp(8px,1.2vw,11px);color:rgba(255,200,0,.45);letter-spacing:3px;margin-top:8px;font-family:Share Tech Mono,monospace;">DUBAI · UAE · GITEX 2024</div>';
+  const gStyle=document.createElement('style');
+  gStyle.textContent='@keyframes gitexFade{0%,100%{opacity:0;}12%,82%{opacity:1;}}';
+  document.head.appendChild(gStyle);
+  document.body.appendChild(overlay);
+  document.body.appendChild(cConf);
+  document.body.appendChild(label);
+  // Confetti
+  const ctx=cConf.getContext('2d');
+  const confetti=Array.from({length:140},()=>({x:Math.random()*innerWidth,y:-20-Math.random()*100,vx:(Math.random()-.5)*3.5,vy:Math.random()*4+1.5,r:Math.random()*5+2,color:['#00f5ff','#ffcc00','#00ff88','#ff4488','#ffffff','#0088ff'][Math.floor(Math.random()*6)],rot:Math.random()*Math.PI*2,vrot:(Math.random()-.5)*.12}));
+  let cFrame=0;
+  function animConf(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    confetti.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=p.vrot;p.vy+=.035;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.color;ctx.shadowColor=p.color;ctx.shadowBlur=4;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);ctx.restore();});
+    cFrame++;if(cFrame<260)requestAnimationFrame(animConf);
+    else{cConf.style.transition='opacity 1s';cConf.style.opacity='0';setTimeout(()=>cConf.remove(),1000);}
+  }
+  animConf();
+  [400,600,800,1000].forEach((f,i)=>setTimeout(()=>playBeep(f,.18,.07,'sine'),i*110));
+  setTimeout(()=>{overlay.remove();label.remove();document.getElementById('gitexOverlay');},6200);
+}
+
+// GITEX Modal + Infinity Glove card click
+(()=>{
+  // Infinity Glove card opens modal
+  const gloveCard=document.getElementById('gloveCard');
+  const modal=document.getElementById('gloveModal');
+  const closBtn=document.getElementById('gloveModalClose');
+  const bg=document.getElementById('gloveModalBg');
+  function openModal(){modal.style.display='flex';playBeep(600,.12,.05,'sine');unlock('inventor');}
+  function closeModal(){modal.style.display='none';}
+  if(gloveCard)gloveCard.addEventListener('click',openModal);
+  if(closBtn)closBtn.addEventListener('click',closeModal);
+  if(bg)bg.addEventListener('click',closeModal);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+  // Type 'gitex' anywhere (not in input) to trigger GITEX mode
+  let gitexBuf='';
+  document.addEventListener('keydown',e=>{
+    if(document.activeElement===chatInput||document.activeElement.tagName==='INPUT')return;
+    gitexBuf=(gitexBuf+e.key).toLowerCase().slice(-5);
+    if(gitexBuf==='gitex'){gitexBuf='';doGitexMode();}
+  });
+})();
 
 // ═══════════════════════════════════════════════════
 // SCROLL PROGRESS BAR
