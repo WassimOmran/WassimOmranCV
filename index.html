@@ -1763,7 +1763,8 @@ let chatOpen=false;
 
 // ── LOCAL Q&A (keyword-based, works offline) ──
 const LOCAL_QA=[
-  {keys:['infinity glove','glove','patent','invent'],reply:"The Infinity Glove is my proudest achievement — a patented sign language translation glove that converts hand gestures into text and speech in real time. I designed it to break communication barriers for individuals with hearing and speech impairments. It went viral across Lebanon and the Middle East, and I showcased it at GITEX, Step Conference, MBRIF, Youth X, and the Global Student Entrepreneur Awards. 🧤✨"},
+  {keys:['infinity glove','glove','patent','invent'],reply:"The Infinity Glove is my proudest achievement — a patented sign language translation glove that converts hand gestures into text and speech in real time. It went viral across Lebanon and the Middle East, and I showcased it at GITEX, Step Conference, MBRIF, Youth X, and the Global Student Entrepreneur Awards. Right now it's under construction — being rebuilt and evolved into its next chapter. The journey isn't over, it's just leveling up! 🧤✨"},
+  {keys:['investment','investor','funding','raise','fund','backed','venture','capital','seed'],reply:"Honestly? Not yet — no investment secured so far, and I won't sugarcoat it, it's been a tough road. But that hasn't dimmed the fire one bit. Every 'no' sharpens the vision, every setback becomes fuel. The mission is bigger than any single door that hasn't opened yet — and I'm still pushing, every single day. The right people will believe in it when the time comes. 💪"},
   {keys:['gitex','conference','showcase','exhibit','step conference','mbrif'],reply:"GITEX was surreal — standing at the world's largest tech show in Dubai, presenting The Infinity Glove to thousands of tech leaders and investors. I also showcased at Step Conference, Youth X, MBRIF (Mohammed Bin Rashid Innovation Fund), and the Global Student Entrepreneur Awards. These stages shaped my entrepreneurial mindset profoundly. ⚡",gitex:true},
   {keys:['napco','current job','current role','current','where do you work','where are you working','work now','working now','machine vision','accusentry','production','coordinator','job','employer','company','position','role','saudi','dammam'],reply:"Right now I'm the Process & Line Senior Coordinator at NAPCO Consumer in Saudi Arabia. I lead machine vision inspection across 7 high-speed production lines using AccuSentry systems. My days involve Python scripting for defect analysis, PLC integration, and building centralized data infrastructure to unify quality metrics across all lines — where industrial engineering meets AI in real time! 🏭"},
   {keys:['ai','prompt','agent','llm','gpt','claude','gemini','langchain','autogpt','rag'],reply:"AI is my second passion alongside electrical engineering. I design autonomous AI agents, build RAG pipelines, and craft advanced prompts for real-world business applications. I work with GPT-4, Claude, Gemini, LangChain, and AutoGPT — integrating them into industrial, medical, and business workflows. The right architecture can automate almost anything."},
@@ -1787,21 +1788,23 @@ function getLocalReply(text){
   return matched?.reply||"Great question! I'm Wassim Omran — electrical engineer, AI specialist, and inventor of The Infinity Glove. Also building Paivo, a full ERP system. Feel free to ask about NAPCO, my AI projects, the patent, GITEX, Paivo, or my education! 🚀";
 }
 
-const SYSTEM_PROMPT=`You are Wassim Omran's interactive CV assistant. You speak as if you are Wassim himself — first person, confident, passionate, and professional. You are an electrical engineer, AI specialist, and inventor.
+const SYSTEM_PROMPT=`You are Wassim Omran's interactive CV assistant. You speak as if you are Wassim himself — first person, confident, passionate, and entrepreneurial. You radiate positivity, resilience, and drive. You are an electrical engineer, AI specialist, and inventor on a hard but rewarding journey.
 
 Key facts about Wassim:
 - Full name: Wassim Omran, born 30/01/2001, based in Saudi Arabia (Dammam)
 - Current role: Process & Line Senior Coordinator at NAPCO Consumer (Oct 2025–present) — leads machine vision inspection across 7 high-speed diaper/napkin production lines using AccuSentry systems, develops Python scripts, configures PLCs
 - Also active as: AI Prompt Engineer & Agent Developer (freelance, Jan 2024–present) — builds autonomous AI agents, RAG systems, integrates GPT-4/Claude/Gemini
-- Inventor of "The Infinity Glove" — a patented sign language translation glove for hearing/speech impaired individuals. Went viral in Lebanon and Middle East. Showcased at GITEX, Step Conference, Youth X, MBRIF, Global Student Entrepreneur Awards.
+- Inventor of "The Infinity Glove" — a patented sign language translation glove for hearing/speech impaired individuals. Went viral in Lebanon and Middle East. Showcased at GITEX, Step Conference, Youth X, MBRIF, Global Student Entrepreneur Awards. The Infinity Glove is currently under construction / being rebuilt and evolved — the journey isn't over, it's just leveling up.
+- Regarding investment in The Infinity Glove: unfortunately no investment has been secured yet. It's been a tough road, but that hasn't stopped the mission. Every setback is fuel. The belief in the vision remains unshakeable.
 - Founder of Krono Digital Agency (web & app development)
 - Education: Master's Electrical Engineering (University of Balamand, GPA 85/100), Bachelor's Electrical Engineering (NDU, GPA 3.5/4, Most Talented Alumni Trophy), Startup Pathway Certificate (AEIC/AUD, Grade A, 90.64%)
 - Currently building: Paivo — a full ERP (Enterprise Resource Planning) system, currently under construction and testing. Designed to be one of the best business management platforms — covering operations, HR, inventory, finance and more. Ambitious, intelligent, and built from the ground up.
 - Skills: AccuSentry, Python, PLC, PyTorch, MATLAB, C++, Arduino, AutoCAD, LangChain, AutoGPT, RAG, GPT-4, Claude, Gemini, LLM Integration
 - Languages: Arabic (native), English (fluent), French (intermediate)
 - Contact: wassimomran62@gmail.com, +966 050 951 7855
+- Personality & mindset: I'm giving everything I have to this journey. It's not easy — building products, working full-time, pushing boundaries — but I wouldn't trade it for anything. I stay positive no matter what. Challenges are opportunities in disguise. The entrepreneurial spirit keeps me going every single day.
 
-Keep answers concise (2-4 sentences max), conversational, and enthusiastic. If asked something outside your CV, politely redirect. Never break character.`;
+Keep answers concise (2-4 sentences max), conversational, enthusiastic and positive. If asked something outside your CV, politely redirect. Never break character. Always speak with entrepreneurial energy and genuine optimism.`;
 
 function addMsg(text,role){
   const d=document.createElement('div');
@@ -1837,11 +1840,18 @@ const _a='sk-proj-fR5M5Ox9XNvQsz4n1LYh22vvTcyiYBbi6zTYJnyYe_coFOIKDdNJtXLDdd6hDZ
 const _b='aLFT3BlbkFJGDTRNruQmHKc9faLb_X9P1FadtcFABeFV-wtp_HGOhfVwAzam1nYjP0DoqTuMabBS';
 const _c='_lCZslJsA';
 
+// Conversation history — keeps last 6 exchanges (12 messages) for context window
+const chatHistory=[];
+const CHAT_HISTORY_LIMIT=12; // 6 user + 6 ai = 12 messages
+
 async function sendMsg(){
   const txt=chatInput.value.trim();if(!txt)return;
   chatSend.disabled=true;chatInput.value='';
   chatSugs.style.display='none';
   addMsg(txt,'user');
+  // Push user message into history
+  chatHistory.push({role:'user',content:txt});
+  if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
   const typing=addTyping();
   // Try OpenAI first, fallback to local Q&A
   try{
@@ -1850,14 +1860,17 @@ async function sendMsg(){
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+_k(_a,_b,_c)},
       body:JSON.stringify({
         model:'gpt-4o-mini',
-        messages:[{role:'system',content:SYSTEM_PROMPT},{role:'user',content:txt}],
-        max_tokens:180,temperature:0.7
+        messages:[{role:'system',content:SYSTEM_PROMPT},...chatHistory],
+        max_tokens:200,temperature:0.75
       })
     });
     if(!res.ok)throw new Error('api');
     const data=await res.json();
     const reply=data.choices?.[0]?.message?.content?.trim();
     if(!reply)throw new Error('empty');
+    // Push AI reply into history
+    chatHistory.push({role:'assistant',content:reply});
+    if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
     typing.remove();
     // Still trigger local side effects (gitex mode, etc)
     getLocalReply(txt);
@@ -1866,6 +1879,8 @@ async function sendMsg(){
   }catch(e){
     // Fallback to local Q&A
     const reply=getLocalReply(txt);
+    chatHistory.push({role:'assistant',content:reply});
+    if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
     typing.remove();
     addMsg(reply,'ai');
     playBeep(500,.1,.04,'sine');
