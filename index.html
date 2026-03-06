@@ -353,8 +353,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 .sug:hover{background:rgba(0,245,255,.12);color:var(--cyan);}
 
 /* ── SOUND BTN ── */
-#soundBtn{position:fixed;bottom:24px;left:24px;z-index:600;background:rgba(0,12,25,.9);border:1px solid rgba(0,245,255,.2);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:box-shadow .3s;color:rgba(0,245,255,.6);}
-#soundBtn:hover{box-shadow:0 0 16px rgba(0,245,255,.2);}
+
 
 /* ── FOOTER ── */
 .footer{text-align:center;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.18);letter-spacing:4px;padding:40px 0;}
@@ -414,7 +413,6 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   .hud{display:none;}
   #chatPanel{width:calc(100vw - 32px);right:16px;bottom:72px;}
   #chatBtn{right:16px;bottom:16px;padding:10px 16px;font-size:11px;}
-  #soundBtn{left:16px;bottom:16px;}
   #main{padding:40px 14px 100px;}
   .hname{font-size:clamp(24px,10vw,44px);letter-spacing:1px;}
   .htyped{font-size:14px;}
@@ -605,7 +603,6 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 <div id="achWrap"></div>
 
 <!-- SOUND BUTTON -->
-<div id="soundBtn" title="Toggle sound">🔇</div>
 
 <!-- AI CHAT BUTTON -->
 <div id="chatBtn"><div class="aipulse"></div>TALK TO MY CV</div>
@@ -859,17 +856,19 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 // ═══════════════════════════════════════════════════
 // AUDIO ENGINE
 // ═══════════════════════════════════════════════════
-let audioCtx=null,soundOn=false;
-const soundBtn=document.getElementById('soundBtn');
-// Restore sound state from last visit
-try{if(localStorage.getItem('snd')==='1'){soundOn=true;soundBtn.textContent='🔊';}}catch(e){}
+let audioCtx=null,soundOn=true;
 function initAudio(){
   if(audioCtx)return;
   audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  humNode=ambientHum();playBoot();
 }
+// Auto-start audio on first interaction
+['click','touchstart','keydown','scroll'].forEach(ev=>
+  window.addEventListener(ev,()=>initAudio(),{once:true,passive:true})
+);
 // Resume AudioContext when returning from PDF/external page on mobile
 document.addEventListener('visibilitychange',()=>{
-  if(!document.hidden&&soundOn&&audioCtx&&audioCtx.state==='suspended'){
+  if(!document.hidden&&audioCtx&&audioCtx.state==='suspended'){
     audioCtx.resume();
   }
 });
@@ -904,13 +903,6 @@ function ambientHum(){
   return {stop:()=>o.stop()};
 }
 let humNode=null;
-soundBtn.addEventListener('click',()=>{
-  initAudio();soundOn=!soundOn;
-  soundBtn.textContent=soundOn?'🔊':'🔇';
-  try{localStorage.setItem('snd',soundOn?'1':'0');}catch(e){}
-  if(soundOn){humNode=ambientHum();playBoot();}
-  else if(humNode){try{humNode.stop();}catch(e){}}
-});
 
 // ═══════════════════════════════════════════════════
 // CURSOR + TRAIL
