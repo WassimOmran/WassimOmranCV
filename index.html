@@ -645,7 +645,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 .media-track{display:flex;animation:marqueeScroll 20s linear infinite;width:max-content;}
 .media-track:hover{animation-play-state:paused;}
 @keyframes marqueeScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-.media-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 32px;flex-shrink:0;filter:grayscale(1) brightness(.5);transition:filter .3s,transform .3s;cursor:pointer;position:relative;text-decoration:none;gap:8px;}
+.media-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 32px;flex-shrink:0;filter:grayscale(1) brightness(.5);transition:filter .3s,transform .3s;position:relative;gap:8px;}
 .media-logo:hover{filter:grayscale(0) brightness(1.1);transform:scale(1.08);}
 .media-logo img{height:36px;max-width:110px;object-fit:contain;}
 .media-logo-name{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--cyan);letter-spacing:1px;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;white-space:nowrap;text-align:center;}
@@ -968,17 +968,17 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
     <div class="shead"><div class="snum2">📺</div><div class="stitle">Media Coverage</div><div class="sline"></div></div>
     <div class="media-marquee-outer">
       <div class="media-track" id="mediaTrack">
-        <a class="media-logo" href="https://www.mtv.com.lb/" target="_blank" rel="noopener"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"><span class="media-logo-name">MTV LEBANON</span></a>
-        <a class="media-logo" href="https://www.lbci.com/" target="_blank" rel="noopener"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"><span class="media-logo-name">LBC INTERNATIONAL</span></a>
-        <a class="media-logo" href="https://www.aljazeera.com/" target="_blank" rel="noopener"><img src="aljazeera.png" alt="Al Jazeera"><span class="media-logo-name">AL JAZEERA</span></a>
-        <a class="media-logo" href="https://www.alarabiya.net/" target="_blank" rel="noopener"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"><span class="media-logo-name">AL ARABIYA</span></a>
-        <a class="media-logo" href="https://www.jadeedtv.com/" target="_blank" rel="noopener"><img src="aljadeed.jpeg" alt="Al Jadeed"><span class="media-logo-name">AL JADEED</span></a>
+        <div class="media-logo"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"><span class="media-logo-name">MTV LEBANON</span></div>
+        <div class="media-logo"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"><span class="media-logo-name">LBC INTERNATIONAL</span></div>
+        <div class="media-logo"><img src="aljazeera.png" alt="Al Jazeera"><span class="media-logo-name">AL JAZEERA</span></div>
+        <div class="media-logo"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"><span class="media-logo-name">AL ARABIYA</span></div>
+        <div class="media-logo"><img src="aljadeed.jpeg" alt="Al Jadeed"><span class="media-logo-name">AL JADEED</span></div>
         <!-- duplicate for seamless loop -->
-        <a class="media-logo" href="https://www.mtv.com.lb/" target="_blank" rel="noopener"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"><span class="media-logo-name">MTV LEBANON</span></a>
-        <a class="media-logo" href="https://www.lbci.com/" target="_blank" rel="noopener"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"><span class="media-logo-name">LBC INTERNATIONAL</span></a>
-        <a class="media-logo" href="https://www.aljazeera.com/" target="_blank" rel="noopener"><img src="aljazeera.png" alt="Al Jazeera"><span class="media-logo-name">AL JAZEERA</span></a>
-        <a class="media-logo" href="https://www.alarabiya.net/" target="_blank" rel="noopener"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"><span class="media-logo-name">AL ARABIYA</span></a>
-        <a class="media-logo" href="https://www.jadeedtv.com/" target="_blank" rel="noopener"><img src="aljadeed.jpeg" alt="Al Jadeed"><span class="media-logo-name">AL JADEED</span></a>
+        <div class="media-logo"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"><span class="media-logo-name">MTV LEBANON</span></div>
+        <div class="media-logo"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"><span class="media-logo-name">LBC INTERNATIONAL</span></div>
+        <div class="media-logo"><img src="aljazeera.png" alt="Al Jazeera"><span class="media-logo-name">AL JAZEERA</span></div>
+        <div class="media-logo"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"><span class="media-logo-name">AL ARABIYA</span></div>
+        <div class="media-logo"><img src="aljadeed.jpeg" alt="Al Jadeed"><span class="media-logo-name">AL JADEED</span></div>
       </div>
     </div>
     <div class="media-caption">◈ AS FEATURED IN ◈</div>
