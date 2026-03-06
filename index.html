@@ -228,6 +228,26 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 .gloc{font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(0,245,255,.7);background:rgba(0,245,255,.06);border:1px solid rgba(0,245,255,.15);padding:4px 12px;border-radius:2px;}
 .gloc span{color:var(--cyan);}
 
+/* ── STICKY MOBILE HEADER ── */
+#stickyBar{
+  display:none;
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  background:rgba(0,6,15,.96);
+  border-bottom:1px solid rgba(0,245,255,.15);
+  backdrop-filter:blur(8px);
+  padding:10px 16px 9px;
+  flex-direction:column;gap:2px;
+  transform:translateY(-100%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 2px 20px rgba(0,0,0,.5);
+}
+#stickyBar.visible{transform:translateY(0);}
+#stickyBar-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:#fff;letter-spacing:2px;line-height:1;}
+#stickyBar-role{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.5);letter-spacing:2px;}
+@media(max-width:600px){
+  #stickyBar{display:flex;}
+}
+
 /* ── ACHIEVEMENTS ── */
 #achWrap{position:fixed;bottom:80px;right:20px;z-index:700;display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
 .ach-toast{
@@ -399,7 +419,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   .hname{font-size:clamp(24px,10vw,44px);letter-spacing:1px;}
   .htyped{font-size:14px;}
   .hmeta{gap:10px;font-size:10px;}
-  .hbio{font-size:13px;}
+  .hbio{display:none;}
   .stats{grid-template-columns:repeat(2,1fr);display:grid;gap:10px;}
   .stat{min-width:unset;}
   .snum{font-size:24px;}
@@ -574,6 +594,12 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   <div class="bpct" id="bpct">0%</div>
 </div>
 <div id="glitchOv"></div>
+
+<!-- STICKY MOBILE HEADER -->
+<div id="stickyBar">
+  <div id="stickyBar-name">WASSIM <span style="color:var(--cyan)">OMRAN</span></div>
+  <div id="stickyBar-role">ELECTRICAL ENGINEER &amp; AI SPECIALIST</div>
+</div>
 
 <!-- ACHIEVEMENTS -->
 <div id="achWrap"></div>
@@ -1091,6 +1117,7 @@ window.addEventListener('deviceorientation',e=>{
 // PARALLAX
 // ═══════════════════════════════════════════════════
 window.addEventListener('scroll',()=>{
+  if(window.innerWidth<=600)return;
   document.querySelectorAll('.para-layer').forEach(el=>{
     const spd=parseFloat(el.dataset.speed||0.2);
     el.style.transform=`translateY(${scrollY*spd}px)`;
@@ -1104,9 +1131,9 @@ function buildGlobe(){
   const c=document.getElementById('globeCanvas'),ctx=c.getContext('2d');
   const R=150,cx2=160,cy2=160;
   const locations=[
-    {lat:33.8,lng:35.5,name:'Lebanon',color:'#00f5ff'},
-    {lat:26.4,lng:50.0,name:'Saudi Arabia',color:'#00ff88'},
-    {lat:25.2,lng:55.3,name:'UAE',color:'#ffcc00'},
+    {lat:33.8,lng:35.5,name:'Lebanon',color:'#00f5ff',lx:8,ly:-4},
+    {lat:26.4,lng:50.0,name:'Saudi Arabia',color:'#00ff88',lx:-88,ly:18},
+    {lat:25.2,lng:55.3,name:'UAE',color:'#ffcc00',lx:8,ly:-10},
   ];
   let rotY=0,dragging=false,lastX=0,dragVel=0;
   c.addEventListener('mousedown',e=>{dragging=true;lastX=e.clientX;});
@@ -1169,7 +1196,7 @@ function buildGlobe(){
       ctx.shadowBlur=0;
       // Label
       ctx.fillStyle=loc.color;ctx.font='bold 10px Share Tech Mono';
-      ctx.fillText(loc.name,proj.x+8,proj.y-4);
+      ctx.fillText(loc.name,proj.x+(loc.lx||8),proj.y+(loc.ly||-4));
     });
     // Shine
     const shine=ctx.createRadialGradient(cx2-R*.3,cy2-R*.3,0,cx2,cy2,R);
@@ -1315,6 +1342,19 @@ function unlock(id){
   playAch();
   setTimeout(()=>{t.style.transition='opacity .5s';t.style.opacity='0';setTimeout(()=>t.remove(),600);},4000);
 }
+
+// Sticky mobile header
+(function(){
+  const bar=document.getElementById('stickyBar');
+  const hero=document.getElementById('hero');
+  function onScroll(){
+    if(!hero||!bar)return;
+    const heroBottom=hero.getBoundingClientRect().bottom;
+    if(heroBottom<0)bar.classList.add('visible');
+    else bar.classList.remove('visible');
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+})();
 
 // Achievement triggers — hover (desktop) + scroll into view (mobile & desktop)
 document.querySelectorAll('[data-ach]').forEach(el=>{
