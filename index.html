@@ -129,6 +129,18 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 .hmeta{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(150,210,255,.65);}
 .hmeta a{color:var(--cyan);text-decoration:none;}
 .hbio{margin-top:20px;font-size:14px;color:rgba(180,220,255,.72);line-height:1.85;max-width:750px;border-left:2px solid rgba(0,245,255,.18);padding-left:18px;position:relative;}
+/* -- PAIVO CARD -- */
+.paivo-card{margin:22px 0 0;background:linear-gradient(135deg,rgba(0,15,10,.97),rgba(0,6,18,.97));border:1px solid rgba(0,255,136,.15);border-radius:6px;padding:16px 20px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;cursor:default;transition:box-shadow .3s,border-color .3s;}
+.paivo-card:hover{box-shadow:0 0 32px rgba(0,255,136,.12);border-color:rgba(0,255,136,.3);}
+.paivo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,136,.4),transparent);}
+.paivo-pulse{width:9px;height:9px;border-radius:50%;background:#00ff88;flex-shrink:0;animation:pulseDot 1.4s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 4px #00ff88;opacity:1;}50%{box-shadow:0 0 14px #00ff88,0 0 28px rgba(0,255,136,.35);opacity:.7;}}
+.paivo-info{flex:1;min-width:0;}
+.paivo-label{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(0,255,136,.45);letter-spacing:3px;margin-bottom:3px;}
+.paivo-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1.2;}
+.paivo-name span{color:#00ff88;text-shadow:0 0 10px rgba(0,255,136,.5);}
+.paivo-desc{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(155,208,255,.4);margin-top:4px;letter-spacing:.3px;}
+.paivo-badge{font-family:'Share Tech Mono',monospace;font-size:8px;padding:5px 11px;border:1px solid rgba(0,255,136,.25);border-radius:20px;color:#00ff88;background:rgba(0,255,136,.06);white-space:nowrap;letter-spacing:1.5px;flex-shrink:0;}
 
 /* ── PARALLAX LAYERS ── */
 .para-layer{will-change:transform;}
@@ -659,7 +671,15 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
           <div class="hbio para-layer" data-speed="0.15">
             Electrical engineer passionate about leveraging technology to solve real-world challenges. Inventor of <strong style="color:var(--cyan);text-shadow:0 0 10px rgba(0,245,255,.4)">"The Infinity Glove,"</strong> a patented assistive technology transforming communication for individuals with hearing and speech impairments. AI specialist with deep expertise in prompt engineering and autonomous agent development.
           </div>
-          <div class="now-building" title="Currently under construction & testing">⚡ NOW BUILDING · <span>PAIVO — FULL ERP SYSTEM</span></div>
+          <div class="paivo-card" title="Currently under construction &amp; testing">
+            <div class="paivo-pulse"></div>
+            <div class="paivo-info">
+              <div class="paivo-label">◈ NOW BUILDING</div>
+              <div class="paivo-name"><span>PAIVO</span> — FULL ERP SYSTEM</div>
+              <div class="paivo-desc">Operations · HR · Inventory · Finance · One Platform</div>
+            </div>
+            <div class="paivo-badge">IN DEV</div>
+          </div>
         </div>
         <div class="hero-avatar-wrap">
           <div class="hex-avatar-wrap" title="Wassim Omran">
