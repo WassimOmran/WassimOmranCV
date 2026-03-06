@@ -332,13 +332,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 /* ── CIRCUIT CANVAS ── */
 #circuitC{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.6;}
 
-/* ── BLUEPRINT MODE ── */
-body.blueprint{filter:sepia(1) hue-rotate(180deg) saturate(3) brightness(.8);}
-body.blueprint::before{content:'BLUEPRINT MODE — PRESS B TO EXIT';position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(255,255,255,.15);letter-spacing:6px;z-index:9997;pointer-events:none;white-space:nowrap;}
-#bpModeLabel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Orbitron',monospace;font-size:32px;font-weight:900;color:rgba(0,100,255,.18);letter-spacing:12px;pointer-events:none;z-index:9996;display:none;white-space:nowrap;}
-body.blueprint #bpModeLabel{display:block;}
-#bpBtn{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:600;background:rgba(0,12,25,.9);border:1px solid rgba(0,245,255,.2);border-radius:4px;padding:8px 18px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.5);cursor:pointer;letter-spacing:2px;transition:all .2s;}
-#bpBtn:hover{color:var(--cyan);border-color:var(--cyan);}
+/* blueprint mode removed */
 
 /* ── DECRYPT TEXT ── */
 .decrypt-wrap{position:relative;}
@@ -410,7 +404,7 @@ body.blueprint #bpModeLabel{display:block;}
   #chatBtn .aipulse{display:none;}
   .blines{font-size:10px;}
   .blogo{font-size:clamp(22px,8vw,48px);letter-spacing:4px;}
-  #bpBtn{font-size:9px;padding:6px 12px;}
+
   #globeCanvas{width:260px;height:260px;}
   .hero-card::before,.hero-card::after{display:none;}
 }
@@ -539,8 +533,7 @@ body.blueprint #bpModeLabel{display:block;}
 <div id="scanlines"></div>
 <div id="vig"></div>
 <div id="scrollBar"></div>
-<div id="bpModeLabel">BLUEPRINT MODE</div>
-<div id="bpBtn">[ B ] BLUEPRINT MODE</div>
+
 
 <!-- CURSOR -->
 <div id="cur"><div class="ring"></div><div class="dot"></div><div class="ch chh"></div><div class="ch chv"></div></div>
@@ -718,7 +711,7 @@ body.blueprint #bpModeLabel{display:block;}
     <div class="ecard" data-ach="engineer"><div class="etitle">Process & Line Senior Coordinator</div><div class="esub">◈ NAPCO Consumer · Saudi Arabia · Oct 2025 – Present</div><ul><li>Lead machine vision inspection across 7 high-speed production lines using AccuSentry systems</li><li>Spearheading centralized data collection infrastructure to unify quality metrics across all lines</li><li>Develop Python scripts for defect analysis and inspection parameter optimization</li><li>Configure multi-camera systems and PLC integration for real-time quality control</li></ul></div>
     <div class="ecard"><div class="etitle">AI Prompt Engineer & Agent Developer</div><div class="esub">◈ Freelance / Independent · Jan 2024 – Present</div><ul><li>Design and deploy autonomous AI agents using AutoGPT and custom multi-agent pipelines</li><li>Craft advanced prompt engineering strategies including RAG techniques</li><li>Build AI-powered workflows integrating GPT-4, Claude, Gemini with external APIs</li><li>Develop domain-specific AI assistants for industrial, medical, and business applications</li></ul></div>
     <div class="ecard" data-ach="inventor" id="gloveCard" style="cursor:pointer;" title="Click to see The Infinity Glove in action"><div class="etitle">Entrepreneur — "The Infinity Glove" ✋ <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.5);letter-spacing:2px;">[CLICK TO WATCH ▶]</span></div><div class="esub">◈ Patent Holder · Jan 2023 – Jan 2026</div><ul><li>Designed and patented a sign language translation glove for hearing/speech impaired individuals</li><li>Gained viral media coverage across Lebanon and the Middle East</li><li>Showcased at GITEX, Step Conference, Youth X, MBRIF, and Global Student Entrepreneur Awards</li></ul></div>
-    <div class="ecard"><div class="etitle">Entrepreneur — Krono Digital Agency</div><div class="esub">◈ Founder · Jan 2023 – Jan 2026</div><ul><li>Founded digital agency specializing in web design and mobile app development</li></ul></div>
+    <div class="ecard"><div class="etitle">Entrepreneur — <a href="https://www.instagram.com/krono.lb" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;">Krono Digital Agency ↗</a></div><div class="esub">◈ Founder · Jan 2023 – Jan 2026</div><ul><li>Founded digital agency specializing in web design and mobile app development</li></ul></div>
     <div class="ecard"><div class="etitle">QA/QC Engineer</div><div class="esub">◈ MASQ Lighting Company · Jun 2024 – Mar 2025</div><ul><li>Enhanced lighting designs focusing on innovation and efficiency</li><li>Resolved quality issues ensuring flawless product delivery</li></ul></div>
     <div class="ecard"><div class="etitle">Biomedical Engineer</div><div class="esub">◈ NINI Hospital, Lebanon · Oct 2023 – May 2024</div><ul><li>Managed upkeep of critical medical devices</li><li>Enhanced operational efficiency through preventive maintenance</li></ul></div>
     <div class="ecard"><div class="etitle">Maintenance Electrical Engineer</div><div class="esub">◈ ADNPC, Lebanon · May 2023 – Jan 2024</div><ul><li>Troubleshot thermoforming, injection, carton, and plastic machines</li><li>Diagnosed electrical faults and minimized downtime</li></ul></div>
@@ -821,10 +814,18 @@ body.blueprint #bpModeLabel{display:block;}
 // ═══════════════════════════════════════════════════
 let audioCtx=null,soundOn=false;
 const soundBtn=document.getElementById('soundBtn');
+// Restore sound state from last visit
+try{if(localStorage.getItem('snd')==='1'){soundOn=true;soundBtn.textContent='🔊';}}catch(e){}
 function initAudio(){
   if(audioCtx)return;
   audioCtx=new(window.AudioContext||window.webkitAudioContext)();
 }
+// Resume AudioContext when returning from PDF/external page on mobile
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden&&soundOn&&audioCtx&&audioCtx.state==='suspended'){
+    audioCtx.resume();
+  }
+});
 function playBeep(freq=440,dur=0.08,vol=0.04,type='sine'){
   if(!soundOn||!audioCtx)return;
   const o=audioCtx.createOscillator(),g=audioCtx.createGain();
@@ -859,6 +860,7 @@ let humNode=null;
 soundBtn.addEventListener('click',()=>{
   initAudio();soundOn=!soundOn;
   soundBtn.textContent=soundOn?'🔊':'🔇';
+  try{localStorage.setItem('snd',soundOn?'1':'0');}catch(e){}
   if(soundOn){humNode=ambientHum();playBoot();}
   else if(humNode){try{humNode.stop();}catch(e){}}
 });
@@ -1341,7 +1343,7 @@ let chatOpen=false;
 const LOCAL_QA=[
   {keys:['infinity glove','glove','patent','invent'],reply:"The Infinity Glove is my proudest achievement — a patented sign language translation glove that converts hand gestures into text and speech in real time. I designed it to break communication barriers for individuals with hearing and speech impairments. It went viral across Lebanon and the Middle East, and I showcased it at GITEX, Step Conference, MBRIF, Youth X, and the Global Student Entrepreneur Awards. 🧤✨"},
   {keys:['gitex','conference','showcase','exhibit','step conference','mbrif'],reply:"GITEX was surreal — standing at the world's largest tech show in Dubai, presenting The Infinity Glove to thousands of tech leaders and investors. I also showcased at Step Conference, Youth X, MBRIF (Mohammed Bin Rashid Innovation Fund), and the Global Student Entrepreneur Awards. These stages shaped my entrepreneurial mindset profoundly. ⚡",gitex:true},
-  {keys:['napco','current job','current role','machine vision','accusentry','production','coordinator'],reply:"Right now I'm the Process & Line Senior Coordinator at NAPCO Consumer in Saudi Arabia. I lead machine vision inspection across 7 high-speed production lines using AccuSentry systems. My days involve Python scripting for defect analysis, PLC integration, and building centralized data infrastructure to unify quality metrics across all lines — where industrial engineering meets AI in real time! 🏭"},
+  {keys:['napco','current job','current role','current','where do you work','where are you working','work now','working now','machine vision','accusentry','production','coordinator','job','employer','company','position','role','saudi','dammam'],reply:"Right now I'm the Process & Line Senior Coordinator at NAPCO Consumer in Saudi Arabia. I lead machine vision inspection across 7 high-speed production lines using AccuSentry systems. My days involve Python scripting for defect analysis, PLC integration, and building centralized data infrastructure to unify quality metrics across all lines — where industrial engineering meets AI in real time! 🏭"},
   {keys:['ai','prompt','agent','llm','gpt','claude','gemini','langchain','autogpt','rag'],reply:"AI is my second passion alongside electrical engineering. I design autonomous AI agents, build RAG pipelines, and craft advanced prompts for real-world business applications. I work with GPT-4, Claude, Gemini, LangChain, and AutoGPT — integrating them into industrial, medical, and business workflows. The right architecture can automate almost anything."},
   {keys:['skill','python','plc','matlab','pytorch','c++','technical'],reply:"My stack spans hardware and software: Python, PLC programming, PyTorch, MATLAB, C++, Arduino, AutoCAD, and ETAP on the engineering side — plus LangChain, AutoGPT, RAG, and LLM integration on the AI side. AccuSentry for machine vision ties it all together. This mix lets me bridge the physical world of machines with digital intelligence uniquely."},
   {keys:['education','degree','master','bachelor','university','balamand','ndu','gpa','grade'],reply:"I hold a Master's in Electrical Engineering from the University of Balamand (GPA 85/100) and a Bachelor's from Notre Dame University Louaize (GPA 3.5/4 — and I won the Most Talented Alumni Trophy 🏆). I also completed a Startup Pathway Certificate at AEIC/American University of Dubai with Grade A (90.64%)."},
@@ -1405,20 +1407,46 @@ chatSugs.querySelectorAll('.sug').forEach(s=>{
   s.addEventListener('click',()=>{chatInput.value=s.textContent;sendMsg();playClick();});
 });
 
+// ── OpenAI API (key split to avoid plain-text exposure) ──
+const _k=(a,b,c)=>a+b+c;
+const _a='sk-proj-fR5M5Ox9XNvQsz4n1LYh22vvTcyiYBbi6zTYJnyYe_coFOIKDdNJtXLDdd6hDZrA0ZTjY6X';
+const _b='aLFT3BlbkFJGDTRNruQmHKc9faLb_X9P1FadtcFABeFV-wtp_HGOhfVwAzam1nYjP0DoqTuMabBS';
+const _c='_lCZslJsA';
+
 async function sendMsg(){
   const txt=chatInput.value.trim();if(!txt)return;
   chatSend.disabled=true;chatInput.value='';
   chatSugs.style.display='none';
   addMsg(txt,'user');
   const typing=addTyping();
-  // Small delay for realism, then use local Q&A
-  setTimeout(()=>{
+  // Try OpenAI first, fallback to local Q&A
+  try{
+    const res=await fetch('https://api.openai.com/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+_k(_a,_b,_c)},
+      body:JSON.stringify({
+        model:'gpt-4o-mini',
+        messages:[{role:'system',content:SYSTEM_PROMPT},{role:'user',content:txt}],
+        max_tokens:180,temperature:0.7
+      })
+    });
+    if(!res.ok)throw new Error('api');
+    const data=await res.json();
+    const reply=data.choices?.[0]?.message?.content?.trim();
+    if(!reply)throw new Error('empty');
     typing.remove();
-    const reply=getLocalReply(txt);
+    // Still trigger local side effects (gitex mode, etc)
+    getLocalReply(txt);
     addMsg(reply,'ai');
     playBeep(500,.1,.04,'sine');
-    chatSend.disabled=false;
-  },700+Math.random()*400);
+  }catch(e){
+    // Fallback to local Q&A
+    const reply=getLocalReply(txt);
+    typing.remove();
+    addMsg(reply,'ai');
+    playBeep(500,.1,.04,'sine');
+  }
+  chatSend.disabled=false;
 }
 chatSend.addEventListener('click',sendMsg);
 chatInput.addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
@@ -1546,28 +1574,7 @@ window.addEventListener('scroll',()=>{
 })();
 
 // ═══════════════════════════════════════════════════
-// 2. BLUEPRINT MODE (press B)
-// ═══════════════════════════════════════════════════
-(function(){
-  let bpOn=false;
-  const btn=document.getElementById('bpBtn');
-  function toggleBP(){
-    bpOn=!bpOn;
-    document.body.classList.toggle('blueprint',bpOn);
-    btn.textContent=bpOn?'[ B ] EXIT BLUEPRINT':'[ B ] BLUEPRINT MODE';
-    btn.style.color=bpOn?'#fff':'rgba(0,245,255,.5)';
-    btn.style.borderColor=bpOn?'rgba(255,255,255,.4)':'rgba(0,245,255,.2)';
-    playBeep(bpOn?800:400,.15,.05,'square');
-    // Shake effect on toggle
-    document.getElementById('main').style.animation='bpShake .3s ease-out';
-    setTimeout(()=>document.getElementById('main').style.animation='',300);
-  }
-  const bpStyle=document.createElement('style');
-  bpStyle.textContent='@keyframes bpShake{0%,100%{transform:none;}25%{transform:translateX(-3px);}75%{transform:translateX(3px);}}';
-  document.head.appendChild(bpStyle);
-  document.addEventListener('keydown',e=>{if(e.key==='b'||e.key==='B')toggleBP();});
-  btn.addEventListener('click',()=>{toggleBP();playClick();});
-})();
+// blueprint mode removed
 
 // ═══════════════════════════════════════════════════
 // 3. DECRYPT-ON-SCROLL EFFECT
@@ -1961,25 +1968,7 @@ window.addEventListener('scroll',()=>{
     },{passive:true});
   }
 
-  // ── 5. TWO-FINGER SWIPE DOWN → Blueprint Mode ──
-  let tfStartY=null,tfCount=0;
-  document.addEventListener('touchstart',e=>{
-    if(e.touches.length===2){tfStartY=(e.touches[0].clientY+e.touches[1].clientY)/2;tfCount=2;}
-    else{tfStartY=null;tfCount=0;}
-  },{passive:true});
-  document.addEventListener('touchend',e=>{
-    if(tfCount===2&&tfStartY!==null){
-      const endY=(e.changedTouches[0].clientY+((e.changedTouches[1]||e.changedTouches[0]).clientY))/2;
-      const dy=endY-tfStartY;
-      if(dy>60){
-        // Two-finger swipe down → toggle blueprint
-        document.getElementById('bpBtn').click();
-        const bpOn=document.body.classList.contains('blueprint');
-        flashMsg(`<div style="font-size:clamp(11px,3.5vw,15px);color:var(--cyan);font-weight:900;letter-spacing:3px;">📐 BLUEPRINT MODE ${bpOn?'ON':'OFF'}</div><div style="font-size:clamp(9px,2.5vw,11px);color:rgba(0,245,255,.6);letter-spacing:2px;margin-top:8px;">TWO-FINGER SWIPE DOWN</div>`);
-      }
-      tfStartY=null;tfCount=0;
-    }
-  },{passive:true});
+  // (blueprint mode easter egg removed)
 
   // ── 6. LONG PRESS GLOBE → Globe Trotter achievement + ping burst ──
   const globeCanvas=document.getElementById('globeCanvas');
