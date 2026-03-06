@@ -192,6 +192,11 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 .edinst{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);margin-bottom:7px;opacity:.75;}
 .eddet{font-size:12px;color:rgba(155,208,255,.55);}
 .edbadge{display:inline-block;margin-top:9px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dark);background:var(--cyan);padding:3px 10px;border-radius:2px;box-shadow:0 0 10px rgba(0,245,255,.4);}
+.edc.clickable{cursor:pointer;}
+.edc.clickable:hover{border-color:rgba(0,245,255,.3);}
+.trophy-badge{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:4px 10px;background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,165,0,.08));border:1px solid rgba(255,215,0,.4);border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:9px;color:#ffd700;text-decoration:none;box-shadow:0 0 8px rgba(255,215,0,.2);transition:background .2s,box-shadow .2s;}
+.trophy-badge:hover{background:linear-gradient(135deg,rgba(255,215,0,.28),rgba(255,165,0,.18));box-shadow:0 0 18px rgba(255,215,0,.45);}
+.edfoot{margin-top:8px;font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(0,245,255,.35);letter-spacing:.04em;}
 
 /* ── LANG ── */
 .lgrid{display:flex;gap:14px;flex-wrap:wrap;}
@@ -722,8 +727,8 @@ body.blueprint #bpModeLabel{display:block;}
   <div class="section" id="s2">
     <div class="shead"><div class="snum2">02</div><div class="stitle">Education</div><div class="sline"></div></div>
     <div class="egrid">
-      <div class="edc" data-ach="scholar"><div class="edico">⚡</div><div class="eddeg">Master's — Electrical Engineering</div><div class="edinst">University of Balamand · 2023–2024</div><div class="eddet">GPA 85/100</div><div class="edbadge">GRADUATE</div></div>
-      <div class="edc"><div class="edico">🎓</div><div class="eddeg">Bachelor's — Electrical Engineering</div><div class="edinst">Notre Dame University Louaize · 2018–2023</div><div class="eddet">GPA 3.5/4 · Most Talented Alumni Trophy</div><div class="edbadge">HONORS</div></div>
+      <div class="edc clickable" data-ach="scholar" onclick="window.open('Balamand%20degree.pdf','_blank');playClick()" title="View Degree Certificate"><div class="edico">⚡</div><div class="eddeg">Master's — Electrical Engineering</div><div class="edinst">University of Balamand · 2023–2024</div><div class="eddet">GPA 85/100</div><div class="edbadge">GRADUATE</div><div class="edfoot">📄 VIEW CERTIFICATE ↗</div></div>
+      <div class="edc clickable" onclick="window.open('ndu%20degree.pdf','_blank');playClick()" title="View Degree Certificate"><div class="edico">🎓</div><div class="eddeg">Bachelor's — Electrical Engineering</div><div class="edinst">Notre Dame University Louaize · 2018–2023</div><div class="eddet">GPA 3.5/4</div><div class="edbadge">HONORS</div><a class="trophy-badge" href="Most%20talented%20alumni.HEIC" target="_blank" onclick="event.stopPropagation()" title="View Trophy Award">🏆 MOST TALENTED ALUMNI TROPHY</a><div class="edfoot">📄 VIEW CERTIFICATE ↗</div></div>
       <div class="edc"><div class="edico">🚀</div><div class="eddeg">Startup Pathway Certificate</div><div class="edinst">AEIC · American University of Dubai · 2024</div><div class="eddet">Grade A · 90.64%</div><div class="edbadge">GRADE A</div></div>
     </div>
   </div>
@@ -1805,17 +1810,15 @@ window.addEventListener('scroll',()=>{
 // CLICKABLE STATS + CONFERENCES MODAL + PATENT STAMP
 // ═══════════════════════════════════════════════════
 (function(){
-  // Patent stat → open glove modal
+  // Patent stat → open patent PDF
   const statPatent=document.getElementById('statPatent');
   if(statPatent){
     statPatent.addEventListener('click',()=>{
-      const m=document.getElementById('gloveModal');
-      if(m){m.style.display='flex';unlock('inventor');playClick();}
+      window.open('patent.pdf','_blank');unlock('inventor');playClick();
     });
     statPatent.addEventListener('touchend',e=>{
       e.preventDefault();
-      const m=document.getElementById('gloveModal');
-      if(m){m.style.display='flex';unlock('inventor');playClick();}
+      window.open('patent.pdf','_blank');unlock('inventor');playClick();
     });
   }
 
