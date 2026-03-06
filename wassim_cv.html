@@ -659,6 +659,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
           <div class="hbio para-layer" data-speed="0.15">
             Electrical engineer passionate about leveraging technology to solve real-world challenges. Inventor of <strong style="color:var(--cyan);text-shadow:0 0 10px rgba(0,245,255,.4)">"The Infinity Glove,"</strong> a patented assistive technology transforming communication for individuals with hearing and speech impairments. AI specialist with deep expertise in prompt engineering and autonomous agent development.
           </div>
+          <div class="now-building" title="Currently under construction & testing">⚡ NOW BUILDING · <span>PAIVO — FULL ERP SYSTEM</span></div>
         </div>
         <div class="hero-avatar-wrap">
           <div class="hex-avatar-wrap" title="Wassim Omran">
@@ -1352,7 +1353,8 @@ const LOCAL_QA=[
   {keys:['krono','agency','web','app','digital','startup','founder'],reply:"I founded Krono Digital Agency, specializing in web design and mobile app development. Building the agency taught me end-to-end project management, leading creative teams, and delivering polished digital products — skills that complement my engineering work perfectly."},
   {keys:['biomedical','hospital','nini','medical device'],reply:"I worked as a Biomedical Engineer at NINI Hospital in Lebanon, maintaining critical medical devices and running preventive maintenance programmes. Knowing the equipment I serviced was keeping patients alive made me take quality control very seriously — and that mindset carries into everything I do."},
   {keys:['unique','special','different','stand out','interesting'],reply:"What makes me unique? The combination — I'm not just an engineer, not just an AI developer, not just an entrepreneur. I invented a patented assistive technology that went viral globally, while simultaneously building industrial AI systems and autonomous agents. I bridge the physical world of machines with the digital world of intelligence. That crossover is where real innovation lives."},
-  {keys:['hello','hi','hey','who are you','what are you'],reply:"Hey! I'm Wassim Omran — electrical engineer, AI specialist, machine vision expert, and inventor of The Infinity Glove. Currently based in Saudi Arabia at NAPCO Consumer. Ask me about my projects, skills, the patent, GITEX, or anything on my CV! 🚀"},
+  {keys:['paivo','erp','enterprise resource','management system','under construction','building now','new project','next project'],reply:"Paivo is my most ambitious project yet — a full ERP (Enterprise Resource Planning) system currently under construction and in testing. It's designed to be one of the best tools for managing your entire business: operations, HR, inventory, finance, and more, all in one seamless platform. I'm building it from the ground up with a focus on speed, simplicity, and intelligence. Stay tuned — it's going to be something special. ⚡"},
+  {keys:['hello','hi','hey','who are you','what are you'],reply:"Hey! I'm Wassim Omran — electrical engineer, AI specialist, machine vision expert, and inventor of The Infinity Glove. Currently based in Saudi Arabia at NAPCO Consumer. Also building Paivo, a full ERP system. Ask me anything! 🚀"},
 ];
 function getLocalReply(text){
   const t=text.toLowerCase();
@@ -1361,7 +1363,7 @@ function getLocalReply(text){
     if(qa.keys.some(k=>t.includes(k))){matched=qa;break;}
   }
   if(matched?.gitex)setTimeout(doGitexMode,800);
-  return matched?.reply||"Great question! I'm Wassim Omran — electrical engineer, AI specialist, and inventor of The Infinity Glove. Feel free to ask about my experience at NAPCO, my AI projects, the patent journey, GITEX, or my education. I'd love to tell you more! 🚀";
+  return matched?.reply||"Great question! I'm Wassim Omran — electrical engineer, AI specialist, and inventor of The Infinity Glove. Also building Paivo, a full ERP system. Feel free to ask about NAPCO, my AI projects, the patent, GITEX, Paivo, or my education! 🚀";
 }
 
 const SYSTEM_PROMPT=`You are Wassim Omran's interactive CV assistant. You speak as if you are Wassim himself — first person, confident, passionate, and professional. You are an electrical engineer, AI specialist, and inventor.
@@ -1373,6 +1375,7 @@ Key facts about Wassim:
 - Inventor of "The Infinity Glove" — a patented sign language translation glove for hearing/speech impaired individuals. Went viral in Lebanon and Middle East. Showcased at GITEX, Step Conference, Youth X, MBRIF, Global Student Entrepreneur Awards.
 - Founder of Krono Digital Agency (web & app development)
 - Education: Master's Electrical Engineering (University of Balamand, GPA 85/100), Bachelor's Electrical Engineering (NDU, GPA 3.5/4, Most Talented Alumni Trophy), Startup Pathway Certificate (AEIC/AUD, Grade A, 90.64%)
+- Currently building: Paivo — a full ERP (Enterprise Resource Planning) system, currently under construction and testing. Designed to be one of the best business management platforms — covering operations, HR, inventory, finance and more. Ambitious, intelligent, and built from the ground up.
 - Skills: AccuSentry, Python, PLC, PyTorch, MATLAB, C++, Arduino, AutoCAD, LangChain, AutoGPT, RAG, GPT-4, Claude, Gemini, LLM Integration
 - Languages: Arabic (native), English (fluent), French (intermediate)
 - Contact: wassimomran62@gmail.com, +966 050 951 7855
@@ -1731,7 +1734,7 @@ window.addEventListener('scroll',()=>{
     {year:2024,pct:63,title:'QA/QC Engineer',sub:'MASQ Lighting Company',desc:'Collaborated with development teams to enhance lighting designs. Resolved quality issues and ensured flawless product delivery through systematic quality control processes.'},
     {year:2024,pct:74,title:'Startup Pathway Certificate',sub:'AEIC · American University of Dubai',desc:'Completed an intensive startup program with overall Grade A (90.64%). Developed entrepreneurial strategies and business development skills alongside engineering expertise.'},
     {year:2025,pct:88,title:'Process & Line Senior Coordinator',sub:'NAPCO Consumer, Saudi Arabia',desc:'Leading machine vision inspection across 7 high-speed production lines using AccuSentry systems. Building centralized data infrastructure and developing Python tools for defect analysis.'},
-    {year:2026,pct:100,title:'The Future ⚡',sub:'What\'s Next?',desc:'Continuing to merge industrial engineering with AI innovation. Building Paivo, exploring deep learning, and pushing the boundaries of what\'s possible at the intersection of hardware and intelligence.'},
+    {year:2026,pct:100,title:'Building Paivo ⚡ ERP System',sub:'Under Construction & Testing',desc:'Paivo is my most ambitious project — a full Enterprise Resource Planning system built from the ground up. Designed to be one of the best platforms for managing your entire business: operations, HR, inventory, finance, and more. Currently in active development and testing. The future is being written right now.'},
   ];
 
   const track=document.getElementById('tlTrack');
