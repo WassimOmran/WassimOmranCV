@@ -648,17 +648,22 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 .conf-badge{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dark);background:var(--cyan);padding:2px 8px;border-radius:2px;flex-shrink:0;}
 
 /* ── MEDIA MENTIONS ── */
-.media-scroll-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;cursor:grab;user-select:none;padding:10px 0 16px;scrollbar-width:thin;scrollbar-color:rgba(0,245,255,.2) transparent;}
-.media-scroll-outer::-webkit-scrollbar{height:3px;}
-.media-scroll-outer::-webkit-scrollbar-thumb{background:rgba(0,245,255,.2);border-radius:2px;}
-.media-scroll-outer:active{cursor:grabbing;}
-.media-track{display:flex;width:max-content;gap:0;}
-.media-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 32px;flex-shrink:0;filter:grayscale(1) brightness(.5);transition:filter .3s,transform .3s;position:relative;gap:8px;}
-.media-logo:hover{filter:grayscale(0) brightness(1.1);transform:scale(1.08);}
-.media-logo img{height:36px;max-width:110px;object-fit:contain;}
-.media-logo-name{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--cyan);letter-spacing:1px;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;white-space:nowrap;text-align:center;}
-.media-logo:hover .media-logo-name{opacity:1;transform:translateY(0);}
-.media-caption{text-align:center;margin-top:8px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.3);letter-spacing:3px;}
+.media-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:8px;}
+.media-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:rgba(0,245,255,.03);border:1px solid rgba(0,245,255,.1);border-radius:6px;
+  padding:20px 28px;width:160px;transition:border-color .25s,background .25s,transform .25s,box-shadow .25s;
+  position:relative;overflow:hidden;}
+.media-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,245,255,.3),transparent);opacity:0;transition:opacity .3s;}
+.media-card:hover{border-color:rgba(0,245,255,.35);background:rgba(0,245,255,.07);transform:translateY(-3px);
+  box-shadow:0 0 28px rgba(0,245,255,.12);}
+.media-card:hover::before{opacity:1;}
+.media-card img{height:38px;max-width:120px;object-fit:contain;filter:grayscale(1) brightness(.55);transition:filter .3s;}
+.media-card:hover img{filter:grayscale(0) brightness(1.1);}
+.media-card-name{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(0,245,255,.45);
+  letter-spacing:1.5px;text-align:center;transition:color .25s;}
+.media-card:hover .media-card-name{color:var(--cyan);}
+.media-caption{text-align:center;margin-top:24px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.25);letter-spacing:4px;}
 
 /* ── CLICKABLE STATS ── */
 .stat.clickable{cursor:pointer;}
@@ -893,9 +898,9 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   <!-- EXPERIENCE -->
   <div class="section" id="s1">
     <div class="shead"><div class="snum2">01</div><div class="stitle">Experience</div><div class="sline"></div></div>
-    <div class="ecard" data-ach="engineer"><div class="etitle">Process & Line Senior Coordinator</div><div class="esub">◈ NAPCO Consumer · Saudi Arabia · Oct 2025 – Present</div><ul><li>Lead machine vision inspection across 7 high-speed production lines using AccuSentry systems</li><li>Spearheading centralized data collection infrastructure to unify quality metrics across all lines</li><li>Develop Python scripts for defect analysis and inspection parameter optimization</li><li>Configure multi-camera systems and PLC integration for real-time quality control</li></ul></div>
+    <div class="ecard" data-ach="engineer"><div class="etitle">Process & Line Senior Coordinator</div><div class="esub">◈ NAPCO Consumer · Saudi Arabia · Oct 2025 – Present</div><ul><li>Lead machine vision inspection using AccuSentry systems</li><li>Spearheading centralized data collection infrastructure to unify quality metrics across all lines</li><li>Develop Python scripts for defect analysis and inspection parameter optimization</li><li>Configure multi-camera systems and PLC integration for real-time quality control</li></ul></div>
     <div class="ecard"><div class="etitle">AI Prompt Engineer & Agent Developer</div><div class="esub">◈ Freelance / Independent · Jan 2024 – Present</div><ul><li>Design and deploy autonomous AI agents using AutoGPT and custom multi-agent pipelines</li><li>Craft advanced prompt engineering strategies including RAG techniques</li><li>Build AI-powered workflows integrating GPT-4, Claude, Gemini with external APIs</li><li>Develop domain-specific AI assistants for industrial, medical, and business applications</li></ul></div>
-    <div class="ecard" data-ach="inventor" id="gloveCard" style="cursor:pointer;" title="Click to see The Infinity Glove in action"><div class="etitle">Entrepreneur — "The Infinity Glove" ✋ <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.5);letter-spacing:2px;">[CLICK TO WATCH ▶]</span></div><div class="esub">◈ Patent Holder · Jan 2023 – Jan 2026</div><ul><li>Designed and patented a sign language translation glove for hearing/speech impaired individuals</li><li>Gained viral media coverage across Lebanon and the Middle East</li><li>Showcased at GITEX, Step Conference, Youth X, MBRIF, and Global Student Entrepreneur Awards</li></ul></div>
+    <div class="ecard" data-ach="inventor" id="gloveCard" style="cursor:pointer;" title="Click to see The Infinity Glove in action"><div class="etitle">Entrepreneur — "The Infinity Glove" ✋ <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.5);letter-spacing:2px;">[CLICK TO KNOW MORE]</span></div><div class="esub">◈ Patent Holder · Jan 2023 – Jan 2026</div><ul><li>Designed and patented a sign language translation glove for hearing/speech impaired individuals</li><li>Gained viral media coverage across Lebanon and the Middle East</li><li>Showcased at GITEX, Step Conference, Youth X, MBRIF, and Global Student Entrepreneur Awards</li></ul></div>
     <div class="ecard"><div class="etitle">Entrepreneur — <a href="https://www.instagram.com/krono.lb/" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;">Krono Digital Agency ↗</a></div><div class="esub">◈ Founder · Jan 2023 – Jan 2026</div><ul><li>Founded digital agency specializing in web design and mobile app development</li></ul></div>
     <div class="ecard"><div class="etitle">QA/QC Engineer</div><div class="esub">◈ MASQ Lighting Company · Jun 2024 – Mar 2025</div><ul><li>Enhanced lighting designs focusing on innovation and efficiency</li><li>Resolved quality issues ensuring flawless product delivery</li></ul></div>
     <div class="ecard"><div class="etitle">Biomedical Engineer</div><div class="esub">◈ NINI Hospital, Lebanon · Oct 2023 – May 2024</div><ul><li>Managed upkeep of critical medical devices</li><li>Enhanced operational efficiency through preventive maintenance</li></ul></div>
@@ -940,7 +945,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
     <div class="globe-cards">
       <div class="globe-card">
         <div class="gc-flag">🇱🇧</div>
-        <div class="gc-info"><div class="gc-country">LEBANON</div><div class="gc-role">Origin · University of Balamand</div></div>
+        <div class="gc-info"><div class="gc-country">LEBANON</div><div class="gc-role">Origin</div></div>
         <div class="gc-dot" style="background:#00f5ff;box-shadow:0 0 8px #00f5ff;"></div>
       </div>
       <div class="globe-card">
@@ -989,14 +994,12 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   <!-- MEDIA MENTIONS -->
   <div class="section" id="mediaSection">
     <div class="shead"><div class="snum2">📺</div><div class="stitle">Media Coverage</div><div class="sline"></div></div>
-    <div class="media-scroll-outer" id="mediaScroll">
-      <div class="media-track" id="mediaTrack">
-        <div class="media-logo"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"><span class="media-logo-name">MTV LEBANON</span></div>
-        <div class="media-logo"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"><span class="media-logo-name">LBC INTERNATIONAL</span></div>
-        <div class="media-logo"><img src="aljazeera.png" alt="Al Jazeera"><span class="media-logo-name">AL JAZEERA</span></div>
-        <div class="media-logo"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"><span class="media-logo-name">AL ARABIYA</span></div>
-        <div class="media-logo"><img src="aljadeed.jpeg" alt="Al Jadeed"><span class="media-logo-name">AL JADEED</span></div>
-      </div>
+    <div class="media-grid">
+        <div class="media-card"><img src="Logo_MTV_(Lebanon).png" alt="MTV Lebanon"><span class="media-card-name">MTV LEBANON</span></div>
+        <div class="media-card"><img src="Logo_LBC_International_(Lebanon).png" alt="LBC International"><span class="media-card-name">LBC INTERNATIONAL</span></div>
+        <div class="media-card"><img src="aljazeera.png" alt="Al Jazeera"><span class="media-card-name">AL JAZEERA</span></div>
+        <div class="media-card"><img src="Al_Arabiya_Logo.png" alt="Al Arabiya"><span class="media-card-name">AL ARABIYA</span></div>
+        <div class="media-card"><img src="aljadeed.jpeg" alt="Al Jadeed"><span class="media-card-name">AL JADEED</span></div>
     </div>
     <div class="media-caption">◈ AS FEATURED IN ◈</div>
   </div>
@@ -1536,17 +1539,6 @@ document.querySelectorAll('.ecard,.edc,.skg,.lcard,.stat').forEach(c=>{
 // ═══════════════════════════════════════════════════
 // WIPE EFFECT ON CARDS
 // ═══════════════════════════════════════════════════
-// MEDIA DRAG SCROLL
-(function(){
-  const el=document.getElementById('mediaScroll');
-  if(!el)return;
-  let isDown=false,startX,scrollLeft;
-  el.addEventListener('mousedown',e=>{isDown=true;el.classList.add('active');startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft;});
-  el.addEventListener('mouseleave',()=>{isDown=false;});
-  el.addEventListener('mouseup',()=>{isDown=false;});
-  el.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-el.offsetLeft;el.scrollLeft=scrollLeft-(x-startX)*1.2;});
-})();
-
 function addWipeEffect(){
   const wObs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
@@ -1760,7 +1752,7 @@ let chatOpen=false;
 const LOCAL_QA=[
   {keys:['infinity glove','glove','patent','invent'],reply:"The Infinity Glove is my proudest achievement — a patented sign language translation glove that converts hand gestures into text and speech in real time. I designed it to break communication barriers for individuals with hearing and speech impairments. It went viral across Lebanon and the Middle East, and I showcased it at GITEX, Step Conference, MBRIF, Youth X, and the Global Student Entrepreneur Awards. 🧤✨"},
   {keys:['gitex','conference','showcase','exhibit','step conference','mbrif'],reply:"GITEX was surreal — standing at the world's largest tech show in Dubai, presenting The Infinity Glove to thousands of tech leaders and investors. I also showcased at Step Conference, Youth X, MBRIF (Mohammed Bin Rashid Innovation Fund), and the Global Student Entrepreneur Awards. These stages shaped my entrepreneurial mindset profoundly. ⚡",gitex:true},
-  {keys:['napco','current job','current role','current','where do you work','where are you working','work now','working now','machine vision','accusentry','production','coordinator','job','employer','company','position','role','saudi','dammam'],reply:"Right now I'm the Process & Line Senior Coordinator at NAPCO Consumer in Saudi Arabia. I lead machine vision inspection across 7 high-speed production lines using AccuSentry systems. My days involve Python scripting for defect analysis, PLC integration, and building centralized data infrastructure to unify quality metrics across all lines — where industrial engineering meets AI in real time! 🏭"},
+  {keys:['napco','current job','current role','current','where do you work','where are you working','work now','working now','machine vision','accusentry','production','coordinator','job','employer','company','position','role','saudi','dammam'],reply:"Right now I'm the Process & Line Senior Coordinator at NAPCO Consumer in Saudi Arabia. I lead machine vision inspection using AccuSentry systems. My days involve Python scripting for defect analysis, PLC integration, and building centralized data infrastructure to unify quality metrics across all lines — where industrial engineering meets AI in real time! 🏭"},
   {keys:['ai','prompt','agent','llm','gpt','claude','gemini','langchain','autogpt','rag'],reply:"AI is my second passion alongside electrical engineering. I design autonomous AI agents, build RAG pipelines, and craft advanced prompts for real-world business applications. I work with GPT-4, Claude, Gemini, LangChain, and AutoGPT — integrating them into industrial, medical, and business workflows. The right architecture can automate almost anything."},
   {keys:['skill','python','plc','matlab','pytorch','c++','technical'],reply:"My stack spans hardware and software: Python, PLC programming, PyTorch, MATLAB, C++, Arduino, AutoCAD, and ETAP on the engineering side — plus LangChain, AutoGPT, RAG, and LLM integration on the AI side. AccuSentry for machine vision ties it all together. This mix lets me bridge the physical world of machines with digital intelligence uniquely."},
   {keys:['education','degree','master','bachelor','university','balamand','ndu','gpa','grade'],reply:"I hold a Master's in Electrical Engineering from the University of Balamand (GPA 85/100) and a Bachelor's from Notre Dame University Louaize (GPA 3.5/4 — and I won the Most Talented Alumni Trophy 🏆). I also completed a Startup Pathway Certificate at AEIC/American University of Dubai with Grade A (90.64%)."},
@@ -2143,7 +2135,7 @@ function doGitexMode(){
     {year:2024,pct:55,title:'AI Prompt Engineer & Agent Developer',sub:'Freelance',desc:'Began building autonomous AI agents, RAG pipelines, and LLM-powered automation workflows. Integrated GPT-4, Claude, and Gemini with real business tools.'},
     {year:2024,pct:63,title:'QA/QC Engineer',sub:'MASQ Lighting Company',desc:'Collaborated with development teams to enhance lighting designs. Resolved quality issues and ensured flawless product delivery through systematic quality control processes.'},
     {year:2024,pct:74,title:'Startup Pathway Certificate',sub:'AEIC · American University of Dubai',desc:'Completed an intensive startup program with overall Grade A (90.64%). Developed entrepreneurial strategies and business development skills alongside engineering expertise.'},
-    {year:2025,pct:88,title:'Process & Line Senior Coordinator',sub:'NAPCO Consumer, Saudi Arabia',desc:'Leading machine vision inspection across 7 high-speed production lines using AccuSentry systems. Building centralized data infrastructure and developing Python tools for defect analysis.'},
+    {year:2025,pct:88,title:'Process & Line Senior Coordinator',sub:'NAPCO Consumer, Saudi Arabia',desc:'Leading machine vision inspection using AccuSentry systems. Building centralized data infrastructure and developing Python tools for defect analysis.'},
     {year:2026,pct:100,title:'Building Paivo ⚡ ERP System',sub:'Under Construction & Testing',desc:'Paivo is my most ambitious project — a full Enterprise Resource Planning system built from the ground up. Designed to be one of the best platforms for managing your entire business: operations, HR, inventory, finance, and more. Currently in active development and testing. The future is being written right now.'},
   ];
 
