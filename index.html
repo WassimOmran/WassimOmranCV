@@ -129,7 +129,9 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 .hmeta{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(150,210,255,.65);}
 .hmeta a{color:var(--cyan);text-decoration:none;}
 .hbio{margin-top:20px;font-size:14px;color:rgba(180,220,255,.72);line-height:1.85;max-width:750px;border-left:2px solid rgba(0,245,255,.18);padding-left:18px;position:relative;}
-/* -- PAIVO CARD -- */
+/* -- PROJECT CARDS (NOW BUILDING) -- */
+.projects-row{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 0;}
+.projects-row .paivo-card{flex:1;min-width:200px;margin:0;}
 .paivo-card{margin:22px 0 0;background:linear-gradient(135deg,rgba(0,15,10,.97),rgba(0,6,18,.97));border:1px solid rgba(0,255,136,.15);border-radius:6px;padding:16px 20px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;cursor:default;transition:box-shadow .3s,border-color .3s;}
 .paivo-card:hover{box-shadow:0 0 32px rgba(0,255,136,.12);border-color:rgba(0,255,136,.3);}
 .paivo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,136,.4),transparent);}
@@ -847,14 +849,25 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
           <div class="hbio para-layer" data-speed="0.15">
             Electrical engineer passionate about leveraging technology to solve real-world challenges. Inventor of <strong style="color:var(--cyan);text-shadow:0 0 10px rgba(0,245,255,.4)">"The Infinity Glove,"</strong> a patented assistive technology transforming communication for individuals with hearing and speech impairments. AI specialist with deep expertise in prompt engineering and autonomous agent development.
           </div>
-          <div class="paivo-card" title="Currently under construction &amp; testing">
-            <div class="paivo-pulse"></div>
-            <div class="paivo-info">
-              <div class="paivo-label">◈ NOW BUILDING</div>
-              <div class="paivo-name"><span>PAIVO</span> — FULL ERP SYSTEM</div>
-              <div class="paivo-desc">~1 year in development · Operations · HR · Inventory · Finance</div>
+          <div class="projects-row">
+            <div class="paivo-card">
+              <div class="paivo-pulse"></div>
+              <div class="paivo-info">
+                <div class="paivo-label">◈ NOW BUILDING</div>
+                <div class="paivo-name"><span>WEEPOS</span> — ADVANCED POS</div>
+                <div class="paivo-desc">Enhanced POS platform · Full business management suite</div>
+              </div>
+              <div class="paivo-badge">IN DEV</div>
             </div>
-            <div class="paivo-badge">IN DEV</div>
+            <div class="paivo-card">
+              <div class="paivo-pulse"></div>
+              <div class="paivo-info">
+                <div class="paivo-label">◈ NOW BUILDING</div>
+                <div class="paivo-name"><span>TILLIO</span> — POS LITE</div>
+                <div class="paivo-desc">Stores · Restaurants · Cafés · Delivery · Service businesses</div>
+              </div>
+              <div class="paivo-badge">IN DEV</div>
+            </div>
           </div>
         </div>
         <div class="hero-avatar-wrap">
@@ -874,7 +887,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   <!-- STATS -->
   <div class="stats" id="statsRow">
     <div class="stat" data-t="8"><div class="snum">0</div><div class="slabel">YEARS EXPERIENCE</div></div>
-    <div class="stat" data-t="3"><div class="snum">0</div><div class="slabel">DEGREES & CERTS</div></div>
+    <div class="stat" data-t="9"><div class="snum">0</div><div class="slabel">DEGREES & CERTS</div></div>
     <div class="stat clickable" data-t="1" id="statPatent"><div class="snum">0</div><div class="slabel">PATENT HOLDER</div></div>
     <div class="stat clickable" data-t="6" id="statConf"><div class="snum">0</div><div class="slabel">CONFERENCES</div></div>
     <div class="stat" data-t="3"><div class="snum">0</div><div class="slabel">LANGUAGES</div></div>
@@ -883,12 +896,13 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   <!-- PATENT BADGE -->
   <div class="section" id="patentBadge">
     <div class="shead"><div class="snum2">✋</div><div class="stitle">Innovation Patent</div><div class="sline"></div></div>
-    <div class="patent-card">
+    <div class="patent-card" style="cursor:pointer;" onclick="window.open('patent.pdf','_blank');unlock('inventor');playClick();" title="Click to view the official patent document">
       <div class="patent-left">
         <div class="patent-num">PATENT NO. LB / 2023 / INF-001</div>
         <div class="patent-title">THE INFINITY GLOVE</div>
         <div class="patent-holder">INVENTOR :: WASSIM OMRAN · FILED 2023 · ACTIVE</div>
         <div class="patent-desc">A wearable sign language translation device that interprets hand gestures and finger movements in real time, converting them into text and audio output. Designed to eliminate communication barriers for individuals with hearing and speech impairments. Went viral across Lebanon, the Middle East, and global tech media.</div>
+        <div style="margin-top:14px;display:inline-block;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);border:1px solid rgba(0,245,255,.3);padding:5px 14px;border-radius:2px;letter-spacing:2px;background:rgba(0,245,255,.05);">📄 VIEW PATENT DOCUMENT ↗</div>
       </div>
       <div class="patent-stamp-wrap">
         <div class="patent-stamp" id="patentStamp">
@@ -924,9 +938,59 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
     </div>
   </div>
 
+  <!-- CERTIFICATIONS -->
+  <div class="section" id="s_certs">
+    <div class="shead"><div class="snum2">03</div><div class="stitle">Certifications</div><div class="sline"></div></div>
+    <div class="egrid">
+      <div class="edc">
+        <div class="edico">⚡</div>
+        <div class="eddeg">Low Voltage Systems Design Essentials</div>
+        <div class="edinst">Technical &amp; Vocational Training Corporation · Saudi Arabia</div>
+        <div class="eddet">Professional Certification</div>
+        <div class="edbadge">CERTIFIED</div>
+      </div>
+      <div class="edc">
+        <div class="edico">🔌</div>
+        <div class="eddeg">Electrical Power Distribution Systems Design</div>
+        <div class="edinst">Technical &amp; Vocational Training Corporation · Saudi Arabia</div>
+        <div class="eddet">Professional Certification</div>
+        <div class="edbadge">CERTIFIED</div>
+      </div>
+      <div class="edc">
+        <div class="edico">🏗️</div>
+        <div class="eddeg">Revit</div>
+        <div class="edinst">Technical &amp; Vocational Training Corporation · Saudi Arabia</div>
+        <div class="eddet">Professional Certification</div>
+        <div class="edbadge">CERTIFIED</div>
+      </div>
+      <div class="edc">
+        <div class="edico">💡</div>
+        <div class="eddeg">Lighting Systems Design</div>
+        <div class="edinst">Technical &amp; Vocational Training Corporation · Saudi Arabia</div>
+        <div class="eddet">Professional Certification</div>
+        <div class="edbadge">CERTIFIED</div>
+      </div>
+      <div class="edc clickable" onclick="window.open('https://www.udemy.com/certificate/UC-8a3e4058-e596-4e43-b4af-611965569272/','_blank');playClick();" title="View Certificate">
+        <div class="edico">🤖</div>
+        <div class="eddeg">PyTorch for Deep Learning</div>
+        <div class="edinst">Udemy</div>
+        <div class="eddet">Verified Certificate</div>
+        <div class="edbadge">VERIFIED ↗</div>
+        <div class="edfoot">📄 VIEW CERTIFICATE ↗</div>
+      </div>
+      <div class="edc">
+        <div class="edico">🧠</div>
+        <div class="eddeg">Machine Learning</div>
+        <div class="edinst">Udemy</div>
+        <div class="eddet">Certified</div>
+        <div class="edbadge">CERTIFIED</div>
+      </div>
+    </div>
+  </div>
+
   <!-- SKILLS -->
   <div class="section" id="s3">
-    <div class="shead"><div class="snum2">03</div><div class="stitle">Skills Matrix</div><div class="sline"></div></div>
+    <div class="shead"><div class="snum2">04</div><div class="stitle">Skills Matrix</div><div class="sline"></div></div>
     <div class="skgrid">
       <div class="skg" data-ach="skills"><div class="sgttl">AI & PROMPT ENG.</div><div class="tagw"><span class="tag">Prompt Engineering</span><span class="tag">AI Agents</span><span class="tag">LangChain</span><span class="tag">AutoGPT</span><span class="tag">RAG</span><span class="tag">GPT-4</span><span class="tag">Claude</span><span class="tag">Gemini</span><span class="tag">Fine-Tuning</span><span class="tag">LLM Integration</span></div></div>
       <div class="skg"><div class="sgttl">TECHNICAL</div><div class="tagw"><span class="tag">AccuSentry</span><span class="tag">Python</span><span class="tag">PLC Programming</span><span class="tag">PyTorch</span><span class="tag">MATLAB</span><span class="tag">C++</span><span class="tag">Arduino</span><span class="tag">AutoCAD</span><span class="tag">ETAP</span><span class="tag">Control Systems</span></div></div>
@@ -936,7 +1000,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 
   <!-- GLOBE -->
   <div class="section" id="s4">
-    <div class="shead"><div class="snum2">04</div><div class="stitle">World Presence</div><div class="sline"></div></div>
+    <div class="shead"><div class="snum2">05</div><div class="stitle">World Presence</div><div class="sline"></div></div>
     <!-- Impact stats -->
     <div class="gp-stats">
       <div class="gp-stat"><div class="gp-stat-num">6</div><div class="gp-stat-label">CONFERENCES</div></div>
@@ -974,7 +1038,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 
   <!-- LANGUAGES -->
   <div class="section" id="s5">
-    <div class="shead"><div class="snum2">05</div><div class="stitle">Languages</div><div class="sline"></div></div>
+    <div class="shead"><div class="snum2">06</div><div class="stitle">Languages</div><div class="sline"></div></div>
     <div class="lgrid">
       <div class="lcard" style="--pct:100%">
         <div class="lcard-top"><div class="lcard-flag">🇱🇧</div><div class="lcard-pct">100%</div></div>
@@ -1012,7 +1076,7 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 
   <!-- TIMELINE -->
   <div id="timelineSection">
-    <div class="shead"><div class="snum2">06</div><div class="stitle">Career Timeline</div><div class="sline"></div></div>
+    <div class="shead"><div class="snum2">07</div><div class="stitle">Career Timeline</div><div class="sline"></div></div>
     <div id="tlWrap">
       <div id="tlTrack">
         <div id="tlFill"></div>
@@ -1775,8 +1839,8 @@ const LOCAL_QA=[
   {keys:['krono','agency','web','app','digital','startup','founder'],reply:"I founded Krono Digital Agency, specializing in web design and mobile app development. Building the agency taught me end-to-end project management, leading creative teams, and delivering polished digital products — skills that complement my engineering work perfectly."},
   {keys:['biomedical','hospital','nini','medical device'],reply:"I worked as a Biomedical Engineer at NINI Hospital in Lebanon, maintaining critical medical devices and running preventive maintenance programmes. Knowing the equipment I serviced was keeping patients alive made me take quality control very seriously — and that mindset carries into everything I do."},
   {keys:['unique','special','different','stand out','interesting'],reply:"What makes me unique? The combination — I'm not just an engineer, not just an AI developer, not just an entrepreneur. I invented a patented assistive technology that went viral globally, while simultaneously building industrial AI systems and autonomous agents. I bridge the physical world of machines with the digital world of intelligence. That crossover is where real innovation lives."},
-  {keys:['paivo','erp','enterprise resource','management system','under construction','building now','new project','next project'],reply:"Paivo is honestly my most exciting project right now — a full ERP system I've been pouring my heart into for almost a year. We're talking operations, HR, inventory, finance, everything your business needs in one beautifully crafted platform. I'm building it from scratch with the ambition to make it one of the best tools of its kind. Almost a year in the making and every single day of work has been worth it — this one is going to be something special. ⚡🚀"},
-  {keys:['hello','hi','hey','who are you','what are you'],reply:"Hey! I'm Wassim Omran — electrical engineer, AI specialist, machine vision expert, and inventor of The Infinity Glove. Currently based in Saudi Arabia at NAPCO Consumer. Also building Paivo, a full ERP system. Ask me anything! 🚀"},
+  {keys:['weepos','tillio','pos','point of sale','building now','new project','next project'],reply:"Right now I'm building two exciting POS products — Weepos, an enhanced full-featured Point of Sale and business management system, and Tillio POS Lite, a sleek app for stores, restaurants, cafés, and delivery services covering everything from fast sales and inventory to table management, customer profiles, and reports. Both are under active development and I'm putting everything into making them exceptional! ⚡🚀"},
+  {keys:['hello','hi','hey','who are you','what are you'],reply:"Hey! I'm Wassim Omran — electrical engineer, AI specialist, machine vision expert, and inventor of The Infinity Glove. Currently based in Saudi Arabia at NAPCO Consumer. Also building Weepos and Tillio. Ask me anything! 🚀"},
 ];
 function getLocalReply(text){
   const t=text.toLowerCase();
@@ -1785,7 +1849,7 @@ function getLocalReply(text){
     if(qa.keys.some(k=>t.includes(k))){matched=qa;break;}
   }
   if(matched?.gitex)setTimeout(doGitexMode,800);
-  return matched?.reply||"Great question! I'm Wassim Omran — electrical engineer, AI specialist, and inventor of The Infinity Glove. Also building Paivo, a full ERP system. Feel free to ask about NAPCO, my AI projects, the patent, GITEX, Paivo, or my education! 🚀";
+  return matched?.reply||"Great question! I'm Wassim Omran — electrical engineer, AI specialist, and inventor of The Infinity Glove. Also building Weepos and Tillio. Feel free to ask about NAPCO, my AI projects, the patent, GITEX, my certifications, or my education! 🚀";
 }
 
 const SYSTEM_PROMPT=`You are Wassim Omran's interactive CV assistant. You speak as if you are Wassim himself — first person, confident, passionate, and entrepreneurial. You radiate positivity, resilience, and drive. You are an electrical engineer, AI specialist, and inventor on a hard but rewarding journey.
@@ -1798,7 +1862,7 @@ Key facts about Wassim:
 - Regarding investment in The Infinity Glove: unfortunately no investment has been secured yet. It's been a tough road, but that hasn't stopped the mission. Every setback is fuel. The belief in the vision remains unshakeable.
 - Founder of Krono Digital Agency (web & app development)
 - Education: Master's Electrical Engineering (University of Balamand, GPA 85/100), Bachelor's Electrical Engineering (NDU, GPA 3.5/4, Most Talented Alumni Trophy), Startup Pathway Certificate (AEIC/AUD, Grade A, 90.64%)
-- Currently building: Paivo — a full ERP (Enterprise Resource Planning) system that has been under active development for almost a year. This is not a side project — it's a serious, deeply crafted platform designed to be one of the best business management tools out there, covering operations, HR, inventory, finance and more. Every detail is being built from the ground up with care, intelligence, and ambition. It's going to be something that makes people say 'wow'.
+- Currently building: Weepos — an enhanced, full-featured Point of Sale and business management system. Also building Tillio POS Lite — a sleek POS app for stores, restaurants, cafés, butcheries, and delivery services, with features including fast sales, inventory management, table management, delivery tracking, customer profiles, service orders, returns & refunds, and reports & insights. Both products are under active development.
 - Skills: AccuSentry, Python, PLC, PyTorch, MATLAB, C++, Arduino, AutoCAD, LangChain, AutoGPT, RAG, GPT-4, Claude, Gemini, LLM Integration
 - Languages: Arabic (native), English (fluent), French (intermediate)
 - Contact: wassimomran62@gmail.com, +966 050 951 7855
@@ -1834,11 +1898,10 @@ chatSugs.querySelectorAll('.sug').forEach(s=>{
   s.addEventListener('click',()=>{chatInput.value=s.textContent;sendMsg();playClick();});
 });
 
-// ── OpenAI API (key split to avoid plain-text exposure) ──
-const _k=(a,b,c)=>a+b+c;
-const _a='sk-proj-fR5M5Ox9XNvQsz4n1LYh22vvTcyiYBbi6zTYJnyYe_coFOIKDdNJtXLDdd6hDZrA0ZTjY6X';
-const _b='aLFT3BlbkFJGDTRNruQmHKc9faLb_X9P1FadtcFABeFV-wtp_HGOhfVwAzam1nYjP0DoqTuMabBS';
-const _c='_lCZslJsA';
+// ── AI Proxy endpoint (API key lives server-side only) ──
+// Set this to your Cloudflare Worker / backend URL once deployed.
+// Leave as empty string to use local Q&A fallback only.
+const PROXY_URL = '/chat';
 
 // Conversation history — keeps last 6 exchanges (12 messages) for context window
 const chatHistory=[];
@@ -1853,38 +1916,38 @@ async function sendMsg(){
   chatHistory.push({role:'user',content:txt});
   if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
   const typing=addTyping();
-  // Try OpenAI first, fallback to local Q&A
-  try{
-    const res=await fetch('https://api.openai.com/v1/chat/completions',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+_k(_a,_b,_c)},
-      body:JSON.stringify({
-        model:'gpt-4o-mini',
-        messages:[{role:'system',content:SYSTEM_PROMPT},...chatHistory],
-        max_tokens:200,temperature:0.75
-      })
-    });
-    if(!res.ok)throw new Error('api');
-    const data=await res.json();
-    const reply=data.choices?.[0]?.message?.content?.trim();
-    if(!reply)throw new Error('empty');
-    // Push AI reply into history
-    chatHistory.push({role:'assistant',content:reply});
-    if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
-    typing.remove();
-    // Still trigger local side effects (gitex mode, etc)
-    getLocalReply(txt);
-    addMsg(reply,'ai');
-    playBeep(500,.1,.04,'sine');
-  }catch(e){
-    // Fallback to local Q&A
-    const reply=getLocalReply(txt);
-    chatHistory.push({role:'assistant',content:reply});
-    if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
-    typing.remove();
-    addMsg(reply,'ai');
-    playBeep(500,.1,.04,'sine');
+  // Try proxy first (if configured), fallback to local Q&A
+  if(PROXY_URL){
+    try{
+      const res=await fetch(PROXY_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          messages:[{role:'system',content:SYSTEM_PROMPT},...chatHistory],
+          max_tokens:200,temperature:0.75
+        })
+      });
+      if(!res.ok)throw new Error('proxy');
+      const data=await res.json();
+      const reply=data.choices?.[0]?.message?.content?.trim();
+      if(!reply)throw new Error('empty');
+      chatHistory.push({role:'assistant',content:reply});
+      if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
+      typing.remove();
+      getLocalReply(txt);
+      addMsg(reply,'ai');
+      playBeep(500,.1,.04,'sine');
+      chatSend.disabled=false;
+      return;
+    }catch(e){}
   }
+  // Local Q&A fallback
+  const reply=getLocalReply(txt);
+  chatHistory.push({role:'assistant',content:reply});
+  if(chatHistory.length>CHAT_HISTORY_LIMIT) chatHistory.splice(0,chatHistory.length-CHAT_HISTORY_LIMIT);
+  typing.remove();
+  addMsg(reply,'ai');
+  playBeep(500,.1,.04,'sine');
   chatSend.disabled=false;
 }
 chatSend.addEventListener('click',sendMsg);
@@ -2164,7 +2227,7 @@ function doGitexMode(){
     {year:2024,pct:63,title:'QA/QC Engineer',sub:'MASQ Lighting Company',desc:'Collaborated with development teams to enhance lighting designs. Resolved quality issues and ensured flawless product delivery through systematic quality control processes.'},
     {year:2024,pct:74,title:'Startup Pathway Certificate',sub:'AEIC · American University of Dubai',desc:'Completed an intensive startup program with overall Grade A (90.64%). Developed entrepreneurial strategies and business development skills alongside engineering expertise.'},
     {year:2025,pct:88,title:'Process & Line Senior Coordinator',sub:'NAPCO Consumer, Saudi Arabia',desc:'Leading machine vision inspection across high-speed production lines using AccuSentry systems. Building centralized data infrastructure and developing Python tools for defect analysis.'},
-    {year:2026,pct:100,title:'Building Paivo ⚡ ERP System',sub:'Under Construction & Testing',desc:'Paivo is my most ambitious project — a full Enterprise Resource Planning system built from the ground up. Designed to be one of the best platforms for managing your entire business: operations, HR, inventory, finance, and more. Currently in active development and testing. The future is being written right now.'},
+    {year:2026,pct:100,title:'Building Weepos & Tillio POS ⚡',sub:'Under Development',desc:'Building two POS products: Weepos — an enhanced full-featured business management & POS system, and Tillio POS Lite — a sleek app for stores, restaurants, cafés, and delivery services with fast sales, inventory, table management, delivery tracking, and reports. The entrepreneurial journey continues at full force!'},
   ];
 
   const track=document.getElementById('tlTrack');
