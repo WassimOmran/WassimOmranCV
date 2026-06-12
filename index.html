@@ -385,6 +385,22 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
 }
 @keyframes sndPulse{0%,100%{box-shadow:0 0 12px rgba(0,245,255,.08);}50%{box-shadow:0 0 22px rgba(0,245,255,.45);border-color:rgba(0,245,255,.6);}}
 
+/* ── TILLIO BROCHURE MODAL ── */
+#tillioModal{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;}
+#tillioModalBg{position:absolute;inset:0;background:rgba(0,2,8,.92);backdrop-filter:blur(6px);cursor:pointer;}
+#tillioModalBox{position:relative;z-index:1;background:linear-gradient(135deg,rgba(0,18,38,.99),rgba(0,6,18,.99));border:1px solid rgba(0,255,136,.3);border-radius:8px;width:min(380px,92vw);overflow:hidden;box-shadow:0 0 60px rgba(0,255,136,.15),0 0 120px rgba(0,100,200,.1);animation:modalIn .35s cubic-bezier(.175,.885,.32,1.275) forwards;}
+.tillio-head{padding:18px 20px;border-bottom:1px solid rgba(0,255,136,.15);background:rgba(0,255,136,.04);position:relative;}
+.tillio-head-title{font-family:'Orbitron',monospace;font-size:13px;color:#00ff88;letter-spacing:3px;font-weight:700;}
+.tillio-head-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,255,136,.45);letter-spacing:2px;margin-top:4px;}
+#tillioModalClose{position:absolute;top:14px;right:16px;color:rgba(0,255,136,.5);cursor:pointer;font-size:22px;line-height:1;transition:color .2s;}
+#tillioModalClose:hover{color:#00ff88;}
+.tillio-langs{padding:22px 20px;display:flex;gap:14px;}
+.tillio-lang-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 14px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.18);border-radius:6px;text-decoration:none;transition:background .25s,border-color .25s,transform .2s,box-shadow .25s;cursor:pointer;}
+.tillio-lang-btn:hover{background:rgba(0,255,136,.1);border-color:rgba(0,255,136,.5);transform:translateY(-3px);box-shadow:0 0 24px rgba(0,255,136,.18);}
+.tillio-lang-flag{font-size:36px;line-height:1;}
+.tillio-lang-name{font-family:'Orbitron',monospace;font-size:11px;color:#fff;letter-spacing:2px;font-weight:700;}
+.tillio-lang-badge{font-family:'Share Tech Mono',monospace;font-size:8px;color:#00ff88;letter-spacing:1.5px;}
+
 /* ── DOWNLOAD CV BUTTON ── */
 .dl-cv-btn{
   display:inline-flex;align-items:center;gap:8px;
@@ -773,6 +789,30 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
   </div>
 </div>
 
+<!-- TILLIO BROCHURE MODAL -->
+<div id="tillioModal" style="display:none;">
+  <div id="tillioModalBg"></div>
+  <div id="tillioModalBox">
+    <div class="tillio-head">
+      <div class="tillio-head-title">TILLIO POS LITE</div>
+      <div class="tillio-head-sub">SELECT BROCHURE LANGUAGE</div>
+      <div id="tillioModalClose">✕</div>
+    </div>
+    <div class="tillio-langs">
+      <a href="tillioenglish.JPG" target="_blank" rel="noopener" class="tillio-lang-btn" id="tillioEnBtn">
+        <div class="tillio-lang-flag">🇬🇧</div>
+        <div class="tillio-lang-name">ENGLISH</div>
+        <div class="tillio-lang-badge">VIEW BROCHURE ↗</div>
+      </a>
+      <a href="tillioarabic.JPG" target="_blank" rel="noopener" class="tillio-lang-btn" id="tillioArBtn">
+        <div class="tillio-lang-flag">🇸🇦</div>
+        <div class="tillio-lang-name">ARABIC</div>
+        <div class="tillio-lang-badge">VIEW BROCHURE ↗</div>
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- CONFERENCES MODAL -->
 <div id="confModal" style="display:none;">
   <div id="confModalBg"></div>
@@ -882,12 +922,13 @@ body{background:var(--dark);color:#b8e8ff;font-family:'Exo 2',sans-serif;overflo
               </div>
               <div class="paivo-badge">IN DEV</div>
             </div>
-            <div class="paivo-card">
+            <div class="paivo-card" id="tillioCard" style="cursor:pointer;" title="Click to view Tillio brochure">
               <div class="paivo-pulse"></div>
               <div class="paivo-info">
                 <div class="paivo-label">◈ NOW BUILDING</div>
                 <div class="paivo-name"><span>TILLIO</span> — POS LITE</div>
                 <div class="paivo-desc">Stores · Restaurants · Cafés · Delivery · Service businesses</div>
+                <div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(0,255,136,.6);margin-top:5px;letter-spacing:1px;">📄 VIEW BROCHURE ↗</div>
               </div>
               <div class="paivo-badge">IN DEV</div>
             </div>
@@ -2369,6 +2410,24 @@ function doGitexMode(){
   if(confClose)confClose.addEventListener('click',closeConf);
   if(confBg)confBg.addEventListener('click',closeConf);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&confModal&&confModal.style.display!=='none')closeConf();});
+
+  // Tillio card → open brochure language modal
+  const tillioCard=document.getElementById('tillioCard');
+  const tillioModal=document.getElementById('tillioModal');
+  const tillioModalBg=document.getElementById('tillioModalBg');
+  const tillioClose=document.getElementById('tillioModalClose');
+  function openTillio(){tillioModal.style.display='flex';playClick();}
+  function closeTillio(){tillioModal.style.display='none';}
+  if(tillioCard){
+    tillioCard.addEventListener('click',openTillio);
+    tillioCard.addEventListener('touchend',e=>{e.preventDefault();openTillio();});
+  }
+  if(tillioClose)tillioClose.addEventListener('click',closeTillio);
+  if(tillioModalBg)tillioModalBg.addEventListener('click',closeTillio);
+  document.querySelectorAll('#tillioEnBtn,#tillioArBtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{setTimeout(closeTillio,200);playClick();});
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&tillioModal&&tillioModal.style.display!=='none')closeTillio();});
 
   // Patent stamp animation on scroll into view
   const stamp=document.getElementById('patentStamp');
